@@ -1,0 +1,443 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+// Sample job data - in a real application, this would come from a database or CMS
+const jobs = [
+  {
+    id: 1,
+    title: "Senior Full Stack Developer",
+    department: "Engineering",
+    location: "Remote / Hybrid",
+    type: "Full-time",
+    salary: "Rs 80,000 - Rs 120,000",
+    status: "open",
+    postedDate: "2024-12-10",
+    requirements: [
+      "5+ years of experience in full-stack development",
+      "Proficiency in React, Node.js, and TypeScript",
+      "Experience with cloud platforms (AWS, Azure, or GCP)",
+      "Strong understanding of database design and optimization",
+      "Experience with CI/CD pipelines and DevOps practices"
+    ],
+    responsibilities: [
+      "Design and develop scalable web applications",
+      "Collaborate with cross-functional teams",
+      "Mentor junior developers",
+      "Participate in code reviews and technical discussions",
+      "Contribute to architectural decisions"
+    ]
+  },
+  {
+    id: 2,
+    title: "AI/ML Engineer",
+    department: "AI Research",
+    location: "On-site",
+    type: "Full-time",
+    salary: "Rs 90,000 - Rs 140,000",
+    status: "open",
+    postedDate: "2024-12-08",
+    requirements: [
+      "Master's degree in Computer Science, AI, or related field",
+      "3+ years of experience in machine learning",
+      "Proficiency in Python, TensorFlow, and PyTorch",
+      "Experience with data preprocessing and feature engineering",
+      "Knowledge of deep learning architectures"
+    ],
+    responsibilities: [
+      "Develop and deploy machine learning models",
+      "Research and implement cutting-edge AI algorithms",
+      "Optimize model performance and scalability",
+      "Collaborate with data scientists and engineers",
+      "Present findings to stakeholders"
+    ]
+  },
+  {
+    id: 3,
+    title: "UI/UX Designer",
+    department: "Design",
+    location: "Remote",
+    type: "Full-time",
+    salary: "Rs 60,000 - Rs 90,000",
+    status: "closed",
+    postedDate: "2024-11-25",
+    requirements: [
+      "3+ years of experience in UI/UX design",
+      "Proficiency in Figma, Adobe Creative Suite",
+      "Strong portfolio demonstrating design thinking",
+      "Experience with user research and testing",
+      "Knowledge of accessibility standards"
+    ],
+    responsibilities: [
+      "Create user-centered design solutions",
+      "Conduct user research and usability testing",
+      "Develop wireframes, prototypes, and mockups",
+      "Collaborate with developers and product managers",
+      "Maintain design systems and guidelines"
+    ]
+  },
+  {
+    id: 4,
+    title: "DevOps Engineer",
+    department: "Infrastructure",
+    location: "Hybrid",
+    type: "Full-time",
+    salary: "Rs 75,000 - Rs 110,000",
+    status: "open",
+    postedDate: "2024-12-05",
+    requirements: [
+      "4+ years of experience in DevOps/Infrastructure",
+      "Expertise in Docker, Kubernetes, and cloud platforms",
+      "Experience with Infrastructure as Code (Terraform, CloudFormation)",
+      "Strong scripting skills (Python, Bash)",
+      "Knowledge of monitoring and logging tools"
+    ],
+    responsibilities: [
+      "Design and maintain CI/CD pipelines",
+      "Manage cloud infrastructure and deployments",
+      "Implement monitoring and alerting systems",
+      "Ensure security and compliance standards",
+      "Optimize system performance and costs"
+    ]
+  },
+  {
+    id: 5,
+    title: "Junior Software Developer",
+    department: "Engineering",
+    location: "On-site",
+    type: "Full-time",
+    salary: "Rs 45,000 - Rs 65,000",
+    status: "open",
+    postedDate: "2024-12-12",
+    requirements: [
+      "Bachelor's degree in Computer Science or related field",
+      "1-2 years of programming experience",
+      "Knowledge of JavaScript, HTML, CSS",
+      "Familiarity with version control (Git)",
+      "Strong problem-solving skills and eagerness to learn"
+    ],
+    responsibilities: [
+      "Develop and maintain web applications",
+      "Write clean, maintainable code",
+      "Participate in code reviews",
+      "Learn from senior team members",
+      "Contribute to team projects and initiatives"
+    ]
+  }
+];
+
+const openJobs = jobs.filter(job => job.status === 'open');
+const closedJobs = jobs.filter(job => job.status === 'closed');
+---
+
+<Layout title="Career - Drona Intelligence">
+  <Navigation />
+  
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl md:text-6xl font-space font-bold gradient-text mb-6">Join Our Team</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+        Be part of the future of technology. Work with cutting-edge AI and software solutions while growing your career with industry experts.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="#open-positions" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover-glow transform hover:scale-105"
+        >
+          View Open Positions
+        </a>
+        <a 
+          href="#company-culture" 
+          class="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Our Culture
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Culture Section -->
+  <section id="company-culture" class="py-20 bg-gray-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Why Work With Us?</h2>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          We believe in fostering innovation, continuous learning, and work-life balance
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">Innovation First</h3>
+          <p class="text-gray-400">
+            Work on cutting-edge projects using the latest technologies and methodologies in AI and software development.
+          </p>
+        </div>
+
+        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">Continuous Learning</h3>
+          <p class="text-gray-400">
+            Access to training programs, conferences, and certifications to keep your skills sharp and career growing.
+          </p>
+        </div>
+
+        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">Work-Life Balance</h3>
+          <p class="text-gray-400">
+            Flexible working hours, remote options, and comprehensive benefits to support your personal and professional life.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Positions Section -->
+  <section id="open-positions" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Open Positions</h2>
+        <p class="text-xl text-gray-300">
+          {openJobs.length} open position{openJobs.length !== 1 ? 's' : ''} available
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        {openJobs.map((job) => (
+          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-green-500 transition-all duration-300 hover-glow">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
+              <div class="flex-1">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-2xl font-bold text-white mr-4">{job.title}</h3>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-900/50 text-green-400 border border-green-500">
+                    <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                    Open
+                  </span>
+                </div>
+                <div class="flex flex-wrap gap-4 text-gray-400 text-sm">
+                  <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                      <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+                    </svg>
+                    {job.department}
+                  </span>
+                  <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    {job.location}
+                  </span>
+                  <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                    </svg>
+                    {job.type}
+                  </span>
+                  <span class="flex items-center font-semibold text-blue-400">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
+                    </svg>
+                    {job.salary}
+                  </span>
+                </div>
+              </div>
+              <div class="mt-4 lg:mt-0">
+                <button 
+                  class="job-details-btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
+                  data-job-id={job.id}
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <!-- Job Details (Initially Hidden) -->
+            <div class="job-details hidden" id={`job-${job.id}`}>
+              <div class="border-t border-gray-700 pt-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Requirements</h4>
+                    <ul class="space-y-2">
+                      {job.requirements.map((req) => (
+                        <li class="flex items-start text-gray-300">
+                          <svg class="w-5 h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          {req}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Responsibilities</h4>
+                    <ul class="space-y-2">
+                      {job.responsibilities.map((resp) => (
+                        <li class="flex items-start text-gray-300">
+                          <svg class="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          {resp}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                  <a 
+                    href={`mailto:careers@dronaintelligence.com?subject=Application for ${job.title}&body=Dear Hiring Team,%0D%0A%0D%0AI am interested in applying for the ${job.title} position. Please find my resume attached.%0D%0A%0D%0ABest regards`}
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover-glow"
+                  >
+                    Apply Now
+                  </a>
+                  <button 
+                    class="job-details-btn border border-gray-600 text-gray-300 hover:bg-gray-700 px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+                    data-job-id={job.id}
+                  >
+                    Hide Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closed Positions Section -->
+  {closedJobs.length > 0 && (
+    <section class="py-20 bg-gray-800/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-space font-bold text-gray-400 mb-4">Recently Closed Positions</h2>
+          <p class="text-lg text-gray-500">
+            These positions are currently closed but may reopen in the future
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          {closedJobs.map((job) => (
+            <div class="bg-gray-900/30 p-6 rounded-xl border border-gray-800 opacity-60">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex-1">
+                  <div class="flex items-center mb-2">
+                    <h3 class="text-xl font-bold text-gray-400 mr-4">{job.title}</h3>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-900/50 text-red-400 border border-red-500">
+                      <div class="w-2 h-2 bg-red-400 rounded-full mr-2"></div>
+                      Closed
+                    </span>
+                  </div>
+                  <div class="flex flex-wrap gap-4 text-gray-500 text-sm">
+                    <span>{job.department}</span>
+                    <span>{job.location}</span>
+                    <span>{job.type}</span>
+                    <span>{job.salary}</span>
+                  </div>
+                </div>
+                <div class="mt-4 lg:mt-0">
+                  <button 
+                    class="bg-gray-700 text-gray-400 px-6 py-3 rounded-lg font-semibold cursor-not-allowed"
+                    disabled
+                  >
+                    Position Closed
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Application Process Section -->
+  <section class="py-20 bg-gradient-to-r from-blue-900/50 to-purple-900/50">
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-space font-bold text-white mb-6">
+        Application Process
+      </h2>
+      <p class="text-xl text-gray-300 mb-12">
+        Our streamlined hiring process ensures we find the right fit for both you and our team
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-white font-bold text-xl">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Apply</h3>
+          <p class="text-gray-400 text-sm">Submit your application and resume</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-white font-bold text-xl">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Review</h3>
+          <p class="text-gray-400 text-sm">We review your qualifications</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-white font-bold text-xl">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Interview</h3>
+          <p class="text-gray-400 text-sm">Technical and cultural fit interviews</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-white font-bold text-xl">4</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Welcome</h3>
+          <p class="text-gray-400 text-sm">Join our team and start your journey</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Job details toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const detailButtons = document.querySelectorAll('.job-details-btn');
+    
+    detailButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const jobId = this.getAttribute('data-job-id');
+        const detailsDiv = document.getElementById(`job-${jobId}`);
+        
+        if (detailsDiv) {
+          detailsDiv.classList.toggle('hidden');
+          
+          // Update button text
+          if (detailsDiv.classList.contains('hidden')) {
+            this.textContent = 'View Details';
+          } else {
+            this.textContent = 'Hide Details';
+          }
+        }
+      });
+    });
+  });
+</script>
