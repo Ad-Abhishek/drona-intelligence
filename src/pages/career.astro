@@ -301,12 +301,12 @@ const closedJobs = jobs.filter(job => job.status === 'closed');
                   </div>
                 </div>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                  <a 
-                    href={`mailto:careers@dronaintelligence.com?subject=Application for ${job.title}&body=Dear Hiring Team,%0D%0A%0D%0AI am interested in applying for the ${job.title} position. Please find my resume attached.%0D%0A%0D%0ABest regards`}
+                  <button 
+                    onclick={`openJobApplicationModal('${job.id}', '${job.title}')`}
                     class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover-glow"
                   >
                     Apply Now
-                  </a>
+                  </button>
                   <button 
                     class="job-details-btn border border-gray-600 text-gray-300 hover:bg-gray-700 px-8 py-3 rounded-lg font-semibold transition-all duration-300"
                     data-job-id={job.id}
@@ -414,30 +414,367 @@ const closedJobs = jobs.filter(job => job.status === 'closed');
     </div>
   </section>
 
-  <Footer />
-</Layout>
-
-<script>
-  // Job details toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const detailButtons = document.querySelectorAll('.job-details-btn');
-    
-    detailButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const jobId = this.getAttribute('data-job-id');
-        const detailsDiv = document.getElementById(`job-${jobId}`);
+  <!-- Job Application Modal -->
+  <div id="job-application-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-gray-900 rounded-2xl border border-gray-700 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-white" id="modal-job-title">Apply for Position</h3>
+          <button onclick="closeJobApplicationModal()" class="text-gray-400 hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
         
-        if (detailsDiv) {
-          detailsDiv.classList.toggle('hidden');
+        <form 
+          action="https://formspree.io/f/mqarjyaq" 
+          method="POST" 
+          class="space-y-6"
+          id="job-application-form"
+        >
+          <!-- Hidden fields -->
+          <input type="hidden" name="form_type" value="job_application">
+          <input type="hidden" name="_to" value="dronaintelligence@gmail.com">
+          <input type="hidden" name="_subject" value="New Job Application">
+          <input type="hidden" name="position" id="hidden-job-title">
           
-          // Update button text
-          if (detailsDiv.classList.contains('hidden')) {
-            this.textContent = 'View Details';
-          } else {
-            this.textContent = 'Hide Details';
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+              <input 
+                type="text" 
+                name="first_name"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                placeholder="Enter your first name"
+              >
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+              <input 
+                type="text" 
+                name="last_name"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                placeholder="Enter your last name"
+              >
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+            <input 
+              type="email" 
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              placeholder="Enter your email address"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+            <input 
+              type="tel" 
+              name="phone"
+              required
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              placeholder="Enter your phone number"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Years of Experience</label>
+            <select 
+              name="experience_years"
+              required
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+            >
+              <option value="">Select your experience level</option>
+              <option value="0-1">0-1 years</option>
+              <option value="2-3">2-3 years</option>
+              <option value="4-5">4-5 years</option>
+              <option value="6-8">6-8 years</option>
+              <option value="9+">9+ years</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">LinkedIn Profile (Optional)</label>
+            <input 
+              type="url" 
+              name="linkedin"
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              placeholder="https://linkedin.com/in/yourprofile"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Portfolio/GitHub (Optional)</label>
+            <input 
+              type="url" 
+              name="portfolio"
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              placeholder="https://github.com/yourusername or your portfolio URL"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Cover Letter</label>
+            <textarea 
+              rows="4" 
+              name="cover_letter"
+              required
+              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              placeholder="Tell us why you're interested in this position and what makes you a great fit..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Resume/CV</label>
+            <div class="space-y-4">
+              <!-- File Upload Option -->
+              <div class="relative">
+                <input 
+                  type="file" 
+                  name="resume"
+                  accept=".pdf,.doc,.docx"
+                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:cursor-pointer"
+                  id="resume-upload"
+                >
+                <p class="text-sm text-gray-400 mt-2">Accepted formats: PDF, DOC, DOCX (Max size: 2MB)</p>
+              </div>
+              
+              <!-- OR Divider -->
+              <div class="flex items-center">
+                <div class="flex-1 border-t border-gray-600"></div>
+                <span class="px-3 text-gray-400 text-sm">OR</span>
+                <div class="flex-1 border-t border-gray-600"></div>
+              </div>
+              
+              <!-- Cloud Link Option -->
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Resume Link</label>
+                <input 
+                  type="url" 
+                  name="resume_link"
+                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                  placeholder="https://drive.google.com/... or https://dropbox.com/..."
+                >
+                <p class="text-sm text-gray-400 mt-2">Share a link to your resume from Google Drive, Dropbox, or similar service</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <button 
+              type="submit" 
+              class="flex-1 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
+            >
+              Submit Application
+            </button>
+            <button 
+              type="button"
+              onclick="closeJobApplicationModal()"
+              class="px-8 py-3 border border-gray-600 text-gray-300 hover:bg-gray-700 rounded-lg font-semibold transition-all duration-300"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+
+  <script>
+    // Make functions globally available
+    window.openJobApplicationModal = function(jobId, jobTitle) {
+      const modal = document.getElementById('job-application-modal');
+      const modalTitle = document.getElementById('modal-job-title');
+      const hiddenJobTitle = document.getElementById('hidden-job-title');
+      
+      modalTitle.textContent = `Apply for ${jobTitle}`;
+      hiddenJobTitle.value = jobTitle;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeJobApplicationModal = function() {
+      const modal = document.getElementById('job-application-modal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      
+      // Reset form
+      document.getElementById('job-application-form').reset();
+    };
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Close modal when clicking outside
+      const modal = document.getElementById('job-application-modal');
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            window.closeJobApplicationModal();
           }
-        }
+        });
+      }
+
+      // Job application form submission handling with AJAX
+      const jobForm = document.getElementById('job-application-form');
+      if (jobForm) {
+        jobForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          const form = this;
+          const submitBtn = form.querySelector('button[type="submit"]');
+          
+          // Validate resume submission (either file or link)
+          const fileInput = form.querySelector('#resume-upload');
+          const resumeLinkInput = form.querySelector('input[name="resume_link"]');
+          const file = fileInput.files[0];
+          const resumeLink = resumeLinkInput.value.trim();
+          
+          if (!file && !resumeLink) {
+            alert('Please either upload your resume file or provide a link to your resume.');
+            return;
+          }
+          
+          const formData = new FormData(form);
+          
+          // Handle file upload if provided
+          if (file) {
+            // Check file size (2MB limit for base64 encoding)
+            const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+            if (file.size > maxSize) {
+              alert('File size must be less than 2MB. Please choose a smaller file, compress your resume, or use the link option instead.');
+              return;
+            }
+            
+            // Check file type
+            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+              alert('Please upload a PDF, DOC, or DOCX file.');
+              return;
+            }
+            
+            // Convert file to base64
+            const fileBase64 = await new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = (e) => resolve(e.target.result);
+              reader.readAsDataURL(file);
+            });
+            
+            // Add file information to form data
+            formData.append('resume_filename', file.name);
+            formData.append('resume_size', (file.size / 1024).toFixed(2) + ' KB');
+            formData.append('resume_type', file.type);
+            formData.append('resume_data', fileBase64);
+          }
+          
+          try {
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            const response = await fetch(form.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+            
+            if (response.ok) {
+              // Success
+              form.reset();
+              submitBtn.textContent = 'Application Submitted!';
+              submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+              submitBtn.classList.add('bg-blue-600');
+              
+              // Show success message
+              const successDiv = document.createElement('div');
+              successDiv.className = 'mt-4 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-400 text-center';
+              successDiv.innerHTML = `
+                <div class="flex items-center justify-center mb-2">
+                  <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  Application Submitted Successfully!
+                </div>
+                <p class="text-sm">Thank you for your interest in this position. We'll review your application and contact you if there's a good fit.</p>
+              `;
+              form.appendChild(successDiv);
+              
+              // Close modal after 2 seconds
+              setTimeout(() => {
+                window.closeJobApplicationModal();
+              }, 2000);
+              
+            } else {
+              throw new Error('Form submission failed');
+            }
+            
+          } catch (error) {
+            // Error handling
+            submitBtn.textContent = 'Submission Failed - Try Again';
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('bg-green-600');
+            submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+              submitBtn.textContent = 'Submit Application';
+              submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+              submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+              submitBtn.disabled = false;
+            }, 3000);
+          }
+        });
+      }
+
+      // File upload feedback
+      const fileInput = document.getElementById('resume-upload');
+      if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          const helpText = this.parentNode.querySelector('.text-gray-400');
+          
+          if (file) {
+            const fileSize = (file.size / 1024 / 1024).toFixed(2); // Size in MB
+            helpText.innerHTML = `Selected: <span class="text-green-400">${file.name}</span> (${fileSize} MB)`;
+            helpText.classList.remove('text-gray-400');
+            helpText.classList.add('text-green-400');
+          } else {
+            helpText.textContent = 'Accepted formats: PDF, DOC, DOCX (Max size: 2MB)';
+            helpText.classList.remove('text-green-400');
+            helpText.classList.add('text-gray-400');
+          }
+        });
+      }
+
+      // Job details toggle functionality
+      const detailButtons = document.querySelectorAll('.job-details-btn');
+      
+      detailButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const jobId = this.getAttribute('data-job-id');
+          const detailsDiv = document.getElementById(`job-${jobId}`);
+          
+          if (detailsDiv) {
+            detailsDiv.classList.toggle('hidden');
+            
+            // Update button text
+            if (detailsDiv.classList.contains('hidden')) {
+              this.textContent = 'View Details';
+            } else {
+              this.textContent = 'Hide Details';
+            }
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
+</Layout>

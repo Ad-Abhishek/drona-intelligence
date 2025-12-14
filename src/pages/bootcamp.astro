@@ -485,12 +485,24 @@ import Footer from '../components/Footer.astro';
         <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
           <h3 class="text-2xl font-bold text-white mb-6 text-center">Apply Now</h3>
           
-          <form class="space-y-6">
+          <form 
+            action="https://formspree.io/f/mqarjyaq" 
+            method="POST" 
+            class="space-y-6"
+            id="bootcamp-application-form"
+          >
+            <!-- Hidden field to identify form type -->
+            <input type="hidden" name="form_type" value="bootcamp_application">
+            <input type="hidden" name="_to" value="dronaintelligence@gmail.com">
+            <input type="hidden" name="_subject" value="New Bootcamp Application">
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
                 <input 
                   type="text" 
+                  name="first_name"
+                  required
                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                   placeholder="Enter your first name"
                 >
@@ -499,6 +511,8 @@ import Footer from '../components/Footer.astro';
                 <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
                 <input 
                   type="text" 
+                  name="last_name"
+                  required
                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                   placeholder="Enter your last name"
                 >
@@ -509,6 +523,8 @@ import Footer from '../components/Footer.astro';
               <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
               <input 
                 type="email" 
+                name="email"
+                required
                 class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                 placeholder="Enter your email address"
               >
@@ -518,6 +534,8 @@ import Footer from '../components/Footer.astro';
               <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
               <input 
                 type="tel" 
+                name="phone"
+                required
                 class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                 placeholder="Enter your phone number"
               >
@@ -525,7 +543,11 @@ import Footer from '../components/Footer.astro';
 
             <div>
               <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Bootcamp</label>
-              <select class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none">
+              <select 
+                name="preferred_bootcamp"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              >
                 <option value="">Select a bootcamp program</option>
                 <option value="ai-ml">AI & Machine Learning</option>
                 <option value="fullstack">Full-Stack Development</option>
@@ -536,7 +558,11 @@ import Footer from '../components/Footer.astro';
 
             <div>
               <label class="block text-sm font-medium text-gray-300 mb-2">Current Experience Level</label>
-              <select class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none">
+              <select 
+                name="experience_level"
+                required
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+              >
                 <option value="">Select your experience level</option>
                 <option value="beginner">Beginner (No prior experience)</option>
                 <option value="some">Some experience (Self-taught/courses)</option>
@@ -549,6 +575,8 @@ import Footer from '../components/Footer.astro';
               <label class="block text-sm font-medium text-gray-300 mb-2">Why are you interested in this bootcamp?</label>
               <textarea 
                 rows="4" 
+                name="motivation"
+                required
                 class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                 placeholder="Tell us about your goals and motivation..."
               ></textarea>
@@ -558,6 +586,7 @@ import Footer from '../components/Footer.astro';
               <button 
                 type="submit" 
                 class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover-glow transform hover:scale-105"
+                id="submit-btn"
               >
                 Submit Application
               </button>
@@ -645,3 +674,90 @@ import Footer from '../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  // Bootcamp form submission handling
+  document.getElementById('bootcamp-application-form').addEventListener('submit', function(e) {
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    // Show success message after form submission
+    setTimeout(() => {
+      // This will be handled by Formspree's redirect or you can customize
+      alert('Thank you for your application! We will review it and get back to you soon.');
+    }, 1000);
+  });
+
+  // Handle form success (if using Formspree's AJAX submission)
+  window.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('bootcamp-application-form');
+    
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('submit-btn');
+      
+      try {
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+        
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Success
+          form.reset();
+          submitBtn.textContent = 'Application Submitted!';
+          submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+          submitBtn.classList.add('bg-green-600');
+          
+          // Show success message
+          const successDiv = document.createElement('div');
+          successDiv.className = 'mt-4 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-400 text-center';
+          successDiv.innerHTML = `
+            <div class="flex items-center justify-center mb-2">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Application Submitted Successfully!
+            </div>
+            <p class="text-sm">Thank you for your interest in our bootcamp program. We'll review your application and get back to you within 2-3 business days.</p>
+          `;
+          form.parentNode.appendChild(successDiv);
+          
+          // Reset button after 3 seconds
+          setTimeout(() => {
+            submitBtn.textContent = 'Submit Application';
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('bg-green-600');
+            submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+          }, 3000);
+          
+        } else {
+          throw new Error('Form submission failed');
+        }
+        
+      } catch (error) {
+        // Error handling
+        submitBtn.textContent = 'Submission Failed - Try Again';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('bg-blue-600');
+        submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+          submitBtn.textContent = 'Submit Application';
+          submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+          submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+        }, 3000);
+      }
+    });
+  });
+</script>
