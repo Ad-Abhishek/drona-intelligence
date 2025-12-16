@@ -1,5 +1,7 @@
 ---
 const base = import.meta.env.BASE_URL;
+// Ensure base ends with slash for proper concatenation
+const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <footer class="bg-gray-900 border-t border-gray-800">
@@ -13,7 +15,7 @@ const base = import.meta.env.BASE_URL;
           </div>
           -->
           <div class="w-14 h-14 bg-gradient-to-r rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <img src={`${base}di-logo.png`} />
+            <img src={`${basePath}di-logo.png`} />
           </div>
           <span class="font-space font-bold text-xl gradient-text">Drona Intelligence</span>
         </div>
@@ -44,10 +46,10 @@ const base = import.meta.env.BASE_URL;
       <div>
         <h3 class="text-white font-semibold mb-4">Quick Links</h3>
         <ul class="space-y-2">
-          <li><a href={`${base}services/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Services</a></li>
-          <li><a href={`${base}career/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Career</a></li>
-          <li><a href={`${base}about/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">About Us</a></li>
-          <li><a href={`${base}bootcamp/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Bootcamp</a></li>
+          <li><a href={`${basePath}services/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Services</a></li>
+          <li><a href={`${basePath}career/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Career</a></li>
+          <li><a href={`${basePath}about/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">About Us</a></li>
+          <li><a href={`${basePath}bootcamp/`} class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Bootcamp</a></li>
         </ul>
       </div>
 

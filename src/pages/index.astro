@@ -4,6 +4,8 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
+// Ensure base ends with slash for proper concatenation
+const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <Layout title="Drona Intelligence - AI & Software Solutions">
@@ -29,7 +31,7 @@ const base = import.meta.env.BASE_URL;
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a 
-            href={`${base}services/`} 
+            href={`${basePath}services/`} 
             class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover-glow transform hover:scale-105"
           >
             Explore Services
@@ -150,7 +152,7 @@ const base = import.meta.env.BASE_URL;
 
       <div class="text-center mt-12">
         <a 
-          href={`${base}services/`} 
+          href={`${basePath}services/`} 
           class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
         >
           View All Services
@@ -179,7 +181,7 @@ const base = import.meta.env.BASE_URL;
           Schedule Consultation
         </a>
         <a 
-          href={`${base}bootcamp/`} 
+          href={`${basePath}bootcamp/`} 
           class="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
         >
           Explore Bootcamps
