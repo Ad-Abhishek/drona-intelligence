@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="About Us - Drona Intelligence">
@@ -543,7 +545,7 @@ import Footer from '../components/Footer.astro';
           Schedule Consultation
         </a>
         <a 
-          href="/services" 
+          href={`${base}services/`} 
           class="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
         >
           View Our Services

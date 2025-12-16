@@ -1,5 +1,6 @@
 ---
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 ---
 
 <nav class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
@@ -7,9 +8,9 @@ const currentPath = Astro.url.pathname;
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="flex items-center space-x-2 group">
+        <a href={base} class="flex items-center space-x-2 group">
           <div class="w-14 h-14 bg-gradient-to-r rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <img src="/di-logo.png" />
+            <img src={`${base}di-logo.png`} />
           </div>
          <!-- <span class="font-space font-bold text-xl gradient-text">Drona Intelligence</span> -->
         </a>
@@ -19,32 +20,32 @@ const currentPath = Astro.url.pathname;
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-8">
           <a 
-            href="/" 
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === '/' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
+            href={base} 
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === base || currentPath === base + '/' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
           >
             Home
           </a>
           <a 
-            href="/services" 
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === '/services' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
+            href={`${base}services/`} 
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath.includes('/services') ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
           >
             Services
           </a>
           <a 
-            href="/career" 
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === '/career' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
+            href={`${base}career/`} 
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath.includes('/career') ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
           >
             Career
           </a>
           <a 
-            href="/about" 
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === '/about' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
+            href={`${base}about/`} 
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath.includes('/about') ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
           >
             About Us
           </a>
           <a 
-            href="/bootcamp" 
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath === '/bootcamp' ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
+            href={`${base}bootcamp/`} 
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:text-blue-400 hover:bg-gray-800/50 ${currentPath.includes('/bootcamp') ? 'text-blue-400 bg-gray-800/50' : 'text-gray-300'}`}
           >
             Bootcamp
           </a>
@@ -77,11 +78,11 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile menu -->
   <div class="mobile-menu hidden md:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800/95 backdrop-blur-md">
-      <a href="/" class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-      <a href="/services" class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Services</a>
-      <a href="/career" class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Career</a>
-      <a href="/about" class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
-      <a href="/bootcamp" class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Bootcamp</a>
+      <a href={base} class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a href={`${base}services/`} class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+      <a href={`${base}career/`} class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Career</a>
+      <a href={`${base}about/`} class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">About Us</a>
+      <a href={`${base}bootcamp/`} class="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium">Bootcamp</a>
       <a href="https://calendly.com/dronaintelligence/30min" class="bg-blue-600 hover:bg-blue-700 text-white block px-3 py-2 rounded-md text-base font-medium">Book Appointment</a>
     </div>
   </div>

@@ -8,6 +8,10 @@ export default defineConfig({
   site: 'https://ad-abhishek.github.io',
   base: '/drona-intelligence',
   output: 'static',
+  trailingSlash: 'ignore',
+  build: {
+    format: 'directory'
+  },
   vite: {
     plugins: [tailwindcss()]
   }
