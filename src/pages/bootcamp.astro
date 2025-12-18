@@ -316,13 +316,30 @@ const basePath = base.endsWith('/') ? base : base + '/';
         </p>
       </div>
 
-      <div class="space-y-6">
-        {faqs.map((faq) => (
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl border border-gray-700">
-            <h3 class="text-lg font-semibold text-white mb-3">{faq.question}</h3>
-            <p class="text-gray-300">
-              {faq.answer}
-            </p>
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+            <button 
+              class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-800/50 transition-colors duration-200 faq-toggle"
+              data-faq={index}
+            >
+              <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+              <svg 
+                class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-4">
+                <p class="text-gray-300 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -441,6 +458,40 @@ const basePath = base.endsWith('/') ? base : base + '/';
           submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
         }, 3000);
       }
+    });
+  });
+
+  // FAQ Accordion functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const faqIndex = this.getAttribute('data-faq');
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+        
+        // Close all other FAQs
+        faqToggles.forEach((otherToggle, index) => {
+          if (otherToggle !== this) {
+            const otherContent = otherToggle.nextElementSibling;
+            const otherIcon = otherToggle.querySelector('.faq-icon');
+            otherContent.style.maxHeight = '0px';
+            otherIcon.style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        // Toggle current FAQ
+        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+          // Close
+          content.style.maxHeight = '0px';
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          // Open
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
     });
   });
 </script>

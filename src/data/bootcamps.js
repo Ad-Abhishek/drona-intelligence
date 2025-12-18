@@ -150,8 +150,8 @@ export const features = [
     borderColor: 'hover:border-purple-500'
   },
   {
-    title: 'Job Guarantee',
-    description: 'We\'re so confident in our program that we offer a job guarantee or your money back.',
+    title: 'Job Ready',
+    description: 'Our comprehensive curriculum and hands-on training ensure you\'re fully prepared for the job market.',
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>`,
     gradient: 'from-orange-500 to-red-500',
     borderColor: 'hover:border-orange-500'
