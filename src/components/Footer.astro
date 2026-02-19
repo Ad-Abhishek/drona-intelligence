@@ -5,8 +5,8 @@ const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <footer class="bg-gray-900 border-t border-gray-800">
-  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Company Info -->
       <div class="col-span-1 md:col-span-2">
         <div class="flex items-center space-x-3 mb-4">
@@ -15,9 +15,8 @@ const basePath = base.endsWith('/') ? base : base + '/';
           </div>
           <span class="font-sora font-bold text-xl text-white">Drona Intelligence</span>
         </div>
-        <p class="text-gray-400 mb-6 max-w-md leading-relaxed">
-          Empowering businesses with cutting-edge AI solutions and innovative software development. 
-          Transform your digital presence with our expert team.
+        <p class="text-gray-400 mb-4 text-sm">
+          Empowering businesses with intelligent AI solutions.
         </p>
         <div class="flex space-x-4">
           <a href="https://www.linkedin.com/company/drona-intelligence" class="w-10 h-10 bg-gray-800 hover:bg-orange-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200">
@@ -33,17 +32,6 @@ const basePath = base.endsWith('/') ? base : base + '/';
         </div>
       </div>
 
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-white font-semibold mb-4 font-sora">Quick Links</h3>
-        <ul class="space-y-3">
-          <li><a href={`${basePath}services/`} class="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm">Services</a></li>
-          <li><a href={`${basePath}career/`} class="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm">Career</a></li>
-          <li><a href={`${basePath}about/`} class="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm">About</a></li>
-          <li><a href={`${basePath}bootcamp/`} class="text-gray-400 hover:text-orange-400 transition-colors duration-200 text-sm">Bootcamp</a></li>
-        </ul>
-      </div>
-
       <!-- Contact Info -->
       <div>
         <h3 class="text-white font-semibold mb-4 font-sora">Contact</h3>
@@ -52,7 +40,7 @@ const basePath = base.endsWith('/') ? base : base + '/';
             <svg class="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
-            <span class="text-gray-400">info@dronaintelligence.com</span>
+            <span class="text-gray-400">office@dronaintelligence.com</span>
           </li>
           <li class="flex items-start space-x-3 text-sm">
             <svg class="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +59,7 @@ const basePath = base.endsWith('/') ? base : base + '/';
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-800">
+    <div class="mt-8 pt-6 border-t border-gray-800">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm">
           © <span id="current-year"></span> Drona Intelligence. All rights reserved.
