@@ -99,8 +99,8 @@ export const bootcamps = [
 export const successStories = [
   {
     name: 'Subash Shrestha',
-    initials: 'SM',
-    position: 'AI Engineer at Google',
+    initials: 'SS',
+    position: 'AI Engineer at Google India',
     bootcamp: 'AI & Machine Learning Bootcamp',
     testimonial: 'The AI bootcamp completely changed my career trajectory. I went from working in retail to landing a dream job at Google in just 6 months after graduation.',
     gradient: 'from-blue-500 to-cyan-500',
@@ -108,7 +108,7 @@ export const successStories = [
   },
   {
     name: 'Aarati Thapa',
-    initials: 'MJ',
+    initials: 'AT',
     position: 'Full-Stack Developer at E-Sewa',
     bootcamp: 'Full-Stack Development Bootcamp',
     testimonial: 'The hands-on approach and real-world projects prepared me perfectly for the industry. I got multiple job offers before even graduating!',
@@ -117,7 +117,7 @@ export const successStories = [
   },
   {
     name: 'Aman Ghimire',
-    initials: 'AL',
+    initials: 'AG',
     position: 'Data Scientist at Daraz',
     bootcamp: 'Data Science & Analytics Bootcamp',
     testimonial: 'The data science program gave me the skills and confidence to transition from finance to tech. The career support was incredible!',

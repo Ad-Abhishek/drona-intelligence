@@ -3,778 +3,381 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
-// Sample job data - in a real application, this would come from a database or CMS
+const base = import.meta.env.BASE_URL;
+const basePath = base.endsWith('/') ? base : base + '/';
+
 const jobs = [
   {
     id: 1,
+    jobId: "DI-ENG-247",
     title: "Senior Full Stack Developer",
     department: "Engineering",
     location: "Remote / Hybrid",
     type: "Full-time",
     salary: "Rs 80,000 - Rs 120,000",
     status: "open",
-    postedDate: "2024-12-10",
-    requirements: [
-      "5+ years of experience in full-stack development",
-      "Proficiency in React, Node.js, and TypeScript",
-      "Experience with cloud platforms (AWS, Azure, or GCP)",
-      "Strong understanding of database design and optimization",
-      "Experience with CI/CD pipelines and DevOps practices"
-    ],
-    responsibilities: [
-      "Design and develop scalable web applications",
-      "Collaborate with cross-functional teams",
-      "Mentor junior developers",
-      "Participate in code reviews and technical discussions",
-      "Contribute to architectural decisions"
-    ]
+    color: "orange"
   },
   {
     id: 2,
+    jobId: "DI-AI-583",
     title: "AI/ML Engineer",
     department: "AI Research",
     location: "On-site",
     type: "Full-time",
     salary: "Rs 90,000 - Rs 140,000",
     status: "open",
-    postedDate: "2024-12-08",
-    requirements: [
-      "Master's degree in Computer Science, AI, or related field",
-      "3+ years of experience in machine learning",
-      "Proficiency in Python, TensorFlow, and PyTorch",
-      "Experience with data preprocessing and feature engineering",
-      "Knowledge of deep learning architectures"
-    ],
-    responsibilities: [
-      "Develop and deploy machine learning models",
-      "Research and implement cutting-edge AI algorithms",
-      "Optimize model performance and scalability",
-      "Collaborate with data scientists and engineers",
-      "Present findings to stakeholders"
-    ]
+    color: "red"
   },
   {
     id: 3,
+    jobId: "DI-DES-419",
     title: "UI/UX Designer",
     department: "Design",
     location: "Remote",
     type: "Full-time",
     salary: "Rs 60,000 - Rs 90,000",
-    status: "closed",
-    postedDate: "2024-11-25",
-    requirements: [
-      "3+ years of experience in UI/UX design",
-      "Proficiency in Figma, Adobe Creative Suite",
-      "Strong portfolio demonstrating design thinking",
-      "Experience with user research and testing",
-      "Knowledge of accessibility standards"
-    ],
-    responsibilities: [
-      "Create user-centered design solutions",
-      "Conduct user research and usability testing",
-      "Develop wireframes, prototypes, and mockups",
-      "Collaborate with developers and product managers",
-      "Maintain design systems and guidelines"
-    ]
+    status: "open",
+    color: "amber"
   },
   {
     id: 4,
+    jobId: "DI-OPS-762",
     title: "DevOps Engineer",
     department: "Infrastructure",
     location: "Hybrid",
     type: "Full-time",
     salary: "Rs 75,000 - Rs 110,000",
     status: "open",
-    postedDate: "2024-12-05",
-    requirements: [
-      "4+ years of experience in DevOps/Infrastructure",
-      "Expertise in Docker, Kubernetes, and cloud platforms",
-      "Experience with Infrastructure as Code (Terraform, CloudFormation)",
-      "Strong scripting skills (Python, Bash)",
-      "Knowledge of monitoring and logging tools"
-    ],
-    responsibilities: [
-      "Design and maintain CI/CD pipelines",
-      "Manage cloud infrastructure and deployments",
-      "Implement monitoring and alerting systems",
-      "Ensure security and compliance standards",
-      "Optimize system performance and costs"
-    ]
+    color: "orange"
   },
   {
     id: 5,
-    title: "Junior Software Developer",
-    department: "Engineering",
+    jobId: "DI-DATA-391",
+    title: "Data Analyst",
+    department: "Analytics",
+    location: "Remote",
+    type: "Full-time",
+    salary: "Rs 55,000 - Rs 85,000",
+    status: "closed",
+    color: "gray"
+  },
+  {
+    id: 6,
+    jobId: "DI-PM-628",
+    title: "Product Manager",
+    department: "Product",
+    location: "Hybrid",
+    type: "Full-time",
+    salary: "Rs 95,000 - Rs 135,000",
+    status: "closed",
+    color: "gray"
+  },
+  {
+    id: 7,
+    jobId: "DI-QA-174",
+    title: "QA Engineer",
+    department: "Quality Assurance",
     location: "On-site",
     type: "Full-time",
-    salary: "Rs 45,000 - Rs 65,000",
-    status: "open",
-    postedDate: "2024-12-12",
-    requirements: [
-      "Bachelor's degree in Computer Science or related field",
-      "1-2 years of programming experience",
-      "Knowledge of JavaScript, HTML, CSS",
-      "Familiarity with version control (Git)",
-      "Strong problem-solving skills and eagerness to learn"
-    ],
-    responsibilities: [
-      "Develop and maintain web applications",
-      "Write clean, maintainable code",
-      "Participate in code reviews",
-      "Learn from senior team members",
-      "Contribute to team projects and initiatives"
-    ]
+    salary: "Rs 50,000 - Rs 75,000",
+    status: "closed",
+    color: "gray"
   }
 ];
-
-const openJobs = jobs.filter(job => job.status === 'open');
-const closedJobs = jobs.filter(job => job.status === 'closed');
 ---
 
 <Layout title="Career - Drona Intelligence">
   <Navigation />
   
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-5xl md:text-6xl font-space font-bold gradient-text mb-6">Join Our Team</h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-        Be part of the future of technology. Work with cutting-edge AI and software solutions while growing your career with industry experts.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="#open-positions" 
-          class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover-glow transform hover:scale-105"
-        >
-          View Open Positions
-        </a>
-        <a 
-          href="#company-culture" 
-          class="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
-        >
-          Our Culture
-        </a>
+  <!-- Hero Section with Split Design -->
+  <section class="relative min-h-screen flex items-center overflow-hidden bg-white">
+    <!-- Left Side - Content -->
+    <div class="w-full lg:w-1/2 px-4 sm:px-6 lg:px-16 py-32 relative z-10">
+      <div class="max-w-2xl">
+        <span class="text-orange-600 text-sm font-semibold tracking-wider uppercase mb-4 block">Join Our Team</span>
+        <h1 class="text-6xl lg:text-8xl font-sora font-bold text-gray-900 mb-8 leading-none">
+          Build the<br/>
+          <span class="text-orange-600">Future</span><br/>
+          With Us
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+          We're looking for talented individuals who are passionate about technology, innovation, and making a real impact.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a 
+            href="#open-positions" 
+            class="inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/30"
+          >
+            View Open Roles
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <a 
+            href="#culture" 
+            class="inline-flex items-center justify-center border-2 border-gray-300 text-gray-700 hover:border-orange-500 hover:text-orange-600 px-8 py-4 rounded-xl font-semibold transition-all duration-200"
+          >
+            Our Culture
+          </a>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Company Culture Section -->
-  <section id="company-culture" class="py-20 bg-gray-800/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Why Work With Us?</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          We believe in fostering innovation, continuous learning, and work-life balance
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
+    <!-- Right Side - Visual Element -->
+    <div class="hidden lg:block lg:w-1/2 absolute right-0 top-0 bottom-0">
+      <div class="relative h-full bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center">
+        <!-- Decorative circles -->
+        <div class="absolute top-20 right-20 w-64 h-64 bg-orange-200 rounded-full opacity-40 blur-3xl"></div>
+        <div class="absolute bottom-20 right-40 w-80 h-80 bg-red-200 rounded-full opacity-30 blur-3xl"></div>
+        
+        <!-- Stats -->
+        <div class="relative z-10 space-y-8 p-12">
+          <div class="bg-white rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="text-5xl font-bold text-orange-600 mb-2">{jobs.length}+</div>
+            <div class="text-gray-600 font-medium">Open Positions</div>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-4">Innovation First</h3>
-          <p class="text-gray-400">
-            Work on cutting-edge projects using the latest technologies and methodologies in AI and software development.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
+          <div class="bg-white rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300 ml-12">
+            <div class="text-5xl font-bold text-orange-600 mb-2">50+</div>
+            <div class="text-gray-600 font-medium">Team Members</div>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-4">Continuous Learning</h3>
-          <p class="text-gray-400">
-            Access to training programs, conferences, and certifications to keep your skills sharp and career growing.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+          <div class="bg-white rounded-2xl p-8 shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="text-5xl font-bold text-orange-600 mb-2">100%</div>
+            <div class="text-gray-600 font-medium">Remote Friendly</div>
           </div>
-          <h3 class="text-xl font-semibold text-white mb-4">Work-Life Balance</h3>
-          <p class="text-gray-400">
-            Flexible working hours, remote options, and comprehensive benefits to support your personal and professional life.
-          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Open Positions Section -->
-  <section id="open-positions" class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Open Positions</h2>
-        <p class="text-xl text-gray-300">
-          {openJobs.length} open position{openJobs.length !== 1 ? 's' : ''} available
-        </p>
-      </div>
-
-      <div class="space-y-6">
-        {openJobs.map((job) => (
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-green-500 transition-all duration-300 hover-glow">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-              <div class="flex-1">
-                <div class="flex items-center mb-2">
-                  <h3 class="text-2xl font-bold text-white mr-4">{job.title}</h3>
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-900/50 text-green-400 border border-green-500">
-                    <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                    Open
-                  </span>
-                </div>
-                <div class="flex flex-wrap gap-4 text-gray-400 text-sm">
-                  <span class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                      <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
-                    </svg>
-                    {job.department}
-                  </span>
-                  <span class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                    </svg>
-                    {job.location}
-                  </span>
-                  <span class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                    </svg>
-                    {job.type}
-                  </span>
-                  <span class="flex items-center font-semibold text-blue-400">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
-                    </svg>
-                    {job.salary}
-                  </span>
-                </div>
+  <!-- Culture Section with Diagonal Layout -->
+  <section id="culture" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-br from-orange-500 to-red-600 transform skew-x-12 origin-top-right"></div>
+    
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-5xl font-sora font-bold text-gray-900 mb-6">Why Work Here?</h2>
+          <p class="text-xl text-gray-600 mb-8">
+            We're not just building software. We're building careers, fostering innovation, and creating an environment where you can do your best work.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
               </div>
-              <div class="mt-4 lg:mt-0">
-                <button 
-                  class="job-details-btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
-                  data-job-id={job.id}
-                >
-                  View Details
-                </button>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Cutting-Edge Projects</h3>
+                <p class="text-gray-600">Work on AI and software solutions that push technological boundaries</p>
               </div>
             </div>
 
-            <!-- Job Details (Initially Hidden) -->
-            <div class="job-details hidden" id={`job-${job.id}`}>
-              <div class="border-t border-gray-700 pt-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Requirements</h4>
-                    <ul class="space-y-2">
-                      {job.requirements.map((req) => (
-                        <li class="flex items-start text-gray-300">
-                          <svg class="w-5 h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                          </svg>
-                          {req}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Responsibilities</h4>
-                    <ul class="space-y-2">
-                      {job.responsibilities.map((resp) => (
-                        <li class="flex items-start text-gray-300">
-                          <svg class="w-5 h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                          </svg>
-                          {resp}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Continuous Learning</h3>
+                <p class="text-gray-600">Training budget, conferences, and mentorship programs</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Flexible Work</h3>
+                <p class="text-gray-600">Remote options, flexible hours, and work-life balance</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Collaborative Team</h3>
+                <p class="text-gray-600">Work with talented, supportive colleagues who care</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:pl-16">
+          <div class="bg-white rounded-3xl p-8 shadow-2xl">
+            <blockquote class="text-2xl font-sora text-gray-900 mb-6 leading-relaxed">
+              "Best decision I ever made. The team is incredible, the projects are challenging, and I'm learning something new every day."
+            </blockquote>
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full"></div>
+              <div>
+                <div class="font-semibold text-gray-900">Shekhar Paudel</div>
+                <div class="text-gray-600">Senior Developer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Positions - Creative Staggered Layout -->
+  <section id="open-positions" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Open Positions</h2>
+        <p class="text-xl text-gray-600">Find your next adventure</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {jobs.map((job) => (
+          <div 
+            class={`group relative ${job.status === 'open' ? `bg-gradient-to-r from-${job.color}-50 to-white border-2 border-${job.color}-100 hover:border-${job.color}-300 hover:shadow-lg` : 'bg-gray-50 border-2 border-gray-200 opacity-75'} rounded-2xl p-5 transition-all duration-300`}
+          >
+            <!-- Job ID Badge & Status -->
+            <div class="absolute top-4 right-4 flex items-center gap-2">
+              {job.status === 'closed' && (
+                <div class="px-2 py-1 bg-gray-400 rounded-full">
+                  <span class="text-white text-xs font-semibold uppercase tracking-wider">Closed</span>
                 </div>
-                <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onclick={`openJobApplicationModal('${job.id}', '${job.title}')`}
-                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-center transition-all duration-300 hover-glow"
-                  >
-                    Apply Now
-                  </button>
-                  <button 
-                    class="job-details-btn border border-gray-600 text-gray-300 hover:bg-gray-700 px-8 py-3 rounded-lg font-semibold transition-all duration-300"
-                    data-job-id={job.id}
-                  >
-                    Hide Details
-                  </button>
-                </div>
+              )}
+              <div class={`px-2 py-1 ${job.status === 'open' ? 'bg-gray-900' : 'bg-gray-500'} rounded-full`}>
+                <span class="text-white text-xs font-mono font-semibold tracking-wider">{job.jobId}</span>
+              </div>
+            </div>
+
+            <div class="pr-24">
+              <div class="flex items-center gap-2 mb-2">
+                <div class={`w-2 h-2 ${job.status === 'open' ? `bg-${job.color}-500 animate-pulse` : 'bg-gray-400'} rounded-full`}></div>
+                <span class={`${job.status === 'open' ? `text-${job.color}-700` : 'text-gray-500'} text-xs font-semibold uppercase tracking-wider`}>{job.department}</span>
+              </div>
+              <h3 class={`text-xl font-sora font-bold ${job.status === 'open' ? 'text-gray-900' : 'text-gray-600'} mb-3`}>{job.title}</h3>
+              <div class="flex flex-wrap gap-3 text-sm text-gray-600">
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  {job.location}
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  {job.type}
+                </span>
+              </div>
+              <div class={`mt-2 text-sm font-semibold ${job.status === 'open' ? `text-${job.color}-600` : 'text-gray-500'}`}>
+                {job.salary}
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- Closed Positions Section -->
-  {closedJobs.length > 0 && (
-    <section class="py-20 bg-gray-800/30">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-space font-bold text-gray-400 mb-4">Recently Closed Positions</h2>
-          <p class="text-lg text-gray-500">
-            These positions are currently closed but may reopen in the future
+      <!-- How to Apply Section -->
+      <div class="mt-12">
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <h3 class="text-lg font-sora font-bold text-gray-900 mb-3">How to Apply</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Send your resume to <a href="mailto:careers@dronaintelligence.com" class="text-orange-600 font-semibold hover:underline">careers@dronaintelligence.com</a> with the Job ID in the subject line. We'll respond within 2-3 business days.
           </p>
         </div>
-
-        <div class="space-y-4">
-          {closedJobs.map((job) => (
-            <div class="bg-gray-900/30 p-6 rounded-xl border border-gray-800 opacity-60">
-              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                <div class="flex-1">
-                  <div class="flex items-center mb-2">
-                    <h3 class="text-xl font-bold text-gray-400 mr-4">{job.title}</h3>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-900/50 text-red-400 border border-red-500">
-                      <div class="w-2 h-2 bg-red-400 rounded-full mr-2"></div>
-                      Closed
-                    </span>
-                  </div>
-                  <div class="flex flex-wrap gap-4 text-gray-500 text-sm">
-                    <span>{job.department}</span>
-                    <span>{job.location}</span>
-                    <span>{job.type}</span>
-                    <span>{job.salary}</span>
-                  </div>
-                </div>
-                <div class="mt-4 lg:mt-0">
-                  <button 
-                    class="bg-gray-700 text-gray-400 px-6 py-3 rounded-lg font-semibold cursor-not-allowed"
-                    disabled
-                  >
-                    Position Closed
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
-    </section>
-  )}
 
-  <!-- Application Process Section -->
-  <section class="py-20 bg-gradient-to-r from-blue-900/50 to-purple-900/50">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-space font-bold text-white mb-6">
-        Application Process
-      </h2>
-      <p class="text-xl text-gray-300 mb-12">
-        Our streamlined hiring process ensures we find the right fit for both you and our team
-      </p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">1</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Apply</h3>
-          <p class="text-gray-400 text-sm">Submit your application and resume</p>
+      <div class="mt-16 text-center">
+        <p class="text-gray-600 mb-6">Don't see the right role? We're always looking for talented people.</p>
+        <a 
+          href="mailto:careers@dronaintelligence.com" 
+          class="inline-flex items-center gap-2 border-2 border-gray-300 text-gray-700 hover:border-orange-500 hover:text-orange-600 px-8 py-4 rounded-xl font-semibold transition-all duration-200"
+        >
+          Send Us Your Resume
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perks Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 to-red-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-sora font-bold text-gray-900 mb-4">Perks & Benefits</h2>
+        <p class="text-xl text-gray-600">We take care of our team</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">💰</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Competitive Salary</h3>
+          <p class="text-gray-600">Industry-leading compensation packages and bonuses</p>
         </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">2</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Review</h3>
-          <p class="text-gray-400 text-sm">We review your qualifications</p>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">🏖️</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">PTOs Available</h3>
+          <p class="text-gray-600">Take the time you need to recharge and refresh</p>
         </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">3</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Interview</h3>
-          <p class="text-gray-400 text-sm">Technical and cultural fit interviews</p>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">💻</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Latest Equipment</h3>
+          <p class="text-gray-600">MacBook Pro, monitors, and tools you need</p>
         </div>
-        
-        <div class="text-center">
-          <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">4</span>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Welcome</h3>
-          <p class="text-gray-400 text-sm">Join our team and start your journey</p>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">📚</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Learning Budget</h3>
+          <p class="text-gray-600">Annual budget for courses, books, and conferences</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">🏠</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Remote First</h3>
+          <p class="text-gray-600">Work from anywhere with flexible hours</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="text-4xl mb-4">🚀</div>
+          <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">Career Growth</h3>
+          <p class="text-gray-600">Clear paths for advancement and skill development</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Job Application Modal -->
-  <div id="job-application-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-gray-900 rounded-2xl border border-gray-700 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-      <div class="p-8">
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-bold text-white" id="modal-job-title">Apply for Position</h3>
-          <button onclick="closeJobApplicationModal()" class="text-gray-400 hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        
-        <form 
-          action="https://formspree.io/f/mqarjyaq" 
-          method="POST" 
-          class="space-y-6"
-          id="job-application-form"
-        >
-          <!-- Hidden fields -->
-          <input type="hidden" name="form_type" value="job_application">
-          <input type="hidden" name="_to" value="dronaintelligence@gmail.com">
-          <input type="hidden" name="_subject" value="New Job Application">
-          <input type="hidden" name="position" id="hidden-job-title">
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
-              <input 
-                type="text" 
-                name="first_name"
-                required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                placeholder="Enter your first name"
-              >
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
-              <input 
-                type="text" 
-                name="last_name"
-                required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                placeholder="Enter your last name"
-              >
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-            <input 
-              type="email" 
-              name="email"
-              required
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your email address"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
-            <input 
-              type="tel" 
-              name="phone"
-              required
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              placeholder="Enter your phone number"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Years of Experience</label>
-            <select 
-              name="experience_years"
-              required
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-            >
-              <option value="">Select your experience level</option>
-              <option value="0-1">0-1 years</option>
-              <option value="2-3">2-3 years</option>
-              <option value="4-5">4-5 years</option>
-              <option value="6-8">6-8 years</option>
-              <option value="9+">9+ years</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">LinkedIn Profile (Optional)</label>
-            <input 
-              type="url" 
-              name="linkedin"
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              placeholder="https://linkedin.com/in/yourprofile"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Portfolio/GitHub (Optional)</label>
-            <input 
-              type="url" 
-              name="portfolio"
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              placeholder="https://github.com/yourusername or your portfolio URL"
-            >
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Cover Letter</label>
-            <textarea 
-              rows="4" 
-              name="cover_letter"
-              required
-              class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              placeholder="Tell us why you're interested in this position and what makes you a great fit..."
-            ></textarea>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Resume/CV</label>
-            <div class="space-y-4">
-              <!-- File Upload Option -->
-              <div class="relative">
-                <input 
-                  type="file" 
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:cursor-pointer"
-                  id="resume-upload"
-                >
-                <p class="text-sm text-gray-400 mt-2">Accepted formats: PDF, DOC, DOCX (Max size: 2MB)</p>
-              </div>
-              
-              <!-- OR Divider -->
-              <div class="flex items-center">
-                <div class="flex-1 border-t border-gray-600"></div>
-                <span class="px-3 text-gray-400 text-sm">OR</span>
-                <div class="flex-1 border-t border-gray-600"></div>
-              </div>
-              
-              <!-- Cloud Link Option -->
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Resume Link</label>
-                <input 
-                  type="url" 
-                  name="resume_link"
-                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                  placeholder="https://drive.google.com/... or https://dropbox.com/..."
-                >
-                <p class="text-sm text-gray-400 mt-2">Share a link to your resume from Google Drive, Dropbox, or similar service</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex gap-4">
-            <button 
-              type="submit" 
-              class="flex-1 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
-            >
-              Submit Application
-            </button>
-            <button 
-              type="button"
-              onclick="closeJobApplicationModal()"
-              class="px-8 py-3 border border-gray-600 text-gray-300 hover:bg-gray-700 rounded-lg font-semibold transition-all duration-300"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
+  <!-- CTA Section -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl lg:text-6xl font-sora font-bold text-white mb-6 leading-tight">
+        Ready to Join Us?
+      </h2>
+      <p class="text-xl text-gray-300 mb-10">
+        Let's build something amazing together
+      </p>
+      <a 
+        href="https://calendly.com/dronaintelligence/30min" 
+        class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/30"
+      >
+        Schedule a Chat
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
     </div>
-  </div>
+  </section>
 
   <Footer />
-
-  <script>
-    // Make functions globally available
-    window.openJobApplicationModal = function(jobId, jobTitle) {
-      const modal = document.getElementById('job-application-modal');
-      const modalTitle = document.getElementById('modal-job-title');
-      const hiddenJobTitle = document.getElementById('hidden-job-title');
-      
-      modalTitle.textContent = `Apply for ${jobTitle}`;
-      hiddenJobTitle.value = jobTitle;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    };
-
-    window.closeJobApplicationModal = function() {
-      const modal = document.getElementById('job-application-modal');
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-      
-      // Reset form
-      document.getElementById('job-application-form').reset();
-    };
-
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Close modal when clicking outside
-      const modal = document.getElementById('job-application-modal');
-      if (modal) {
-        modal.addEventListener('click', function(e) {
-          if (e.target === this) {
-            window.closeJobApplicationModal();
-          }
-        });
-      }
-
-      // Job application form submission handling with AJAX
-      const jobForm = document.getElementById('job-application-form');
-      if (jobForm) {
-        jobForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          
-          const form = this;
-          const submitBtn = form.querySelector('button[type="submit"]');
-          
-          // Validate resume submission (either file or link)
-          const fileInput = form.querySelector('#resume-upload');
-          const resumeLinkInput = form.querySelector('input[name="resume_link"]');
-          const file = fileInput.files[0];
-          const resumeLink = resumeLinkInput.value.trim();
-          
-          if (!file && !resumeLink) {
-            alert('Please either upload your resume file or provide a link to your resume.');
-            return;
-          }
-          
-          const formData = new FormData(form);
-          
-          // Handle file upload if provided
-          if (file) {
-            // Check file size (2MB limit for base64 encoding)
-            const maxSize = 2 * 1024 * 1024; // 2MB in bytes
-            if (file.size > maxSize) {
-              alert('File size must be less than 2MB. Please choose a smaller file, compress your resume, or use the link option instead.');
-              return;
-            }
-            
-            // Check file type
-            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-            if (!allowedTypes.includes(file.type)) {
-              alert('Please upload a PDF, DOC, or DOCX file.');
-              return;
-            }
-            
-            // Convert file to base64
-            const fileBase64 = await new Promise((resolve) => {
-              const reader = new FileReader();
-              reader.onload = (e) => resolve(e.target.result);
-              reader.readAsDataURL(file);
-            });
-            
-            // Add file information to form data
-            formData.append('resume_filename', file.name);
-            formData.append('resume_size', (file.size / 1024).toFixed(2) + ' KB');
-            formData.append('resume_type', file.type);
-            formData.append('resume_data', fileBase64);
-          }
-          
-          try {
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-            
-            const response = await fetch(form.action, {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Accept': 'application/json'
-              }
-            });
-            
-            if (response.ok) {
-              // Success
-              form.reset();
-              submitBtn.textContent = 'Application Submitted!';
-              submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
-              submitBtn.classList.add('bg-blue-600');
-              
-              // Show success message
-              const successDiv = document.createElement('div');
-              successDiv.className = 'mt-4 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-400 text-center';
-              successDiv.innerHTML = `
-                <div class="flex items-center justify-center mb-2">
-                  <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  Application Submitted Successfully!
-                </div>
-                <p class="text-sm">Thank you for your interest in this position. We'll review your application and contact you if there's a good fit.</p>
-              `;
-              form.appendChild(successDiv);
-              
-              // Close modal after 2 seconds
-              setTimeout(() => {
-                window.closeJobApplicationModal();
-              }, 2000);
-              
-            } else {
-              throw new Error('Form submission failed');
-            }
-            
-          } catch (error) {
-            // Error handling
-            submitBtn.textContent = 'Submission Failed - Try Again';
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('bg-green-600');
-            submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
-            
-            // Reset button after 3 seconds
-            setTimeout(() => {
-              submitBtn.textContent = 'Submit Application';
-              submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
-              submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-              submitBtn.disabled = false;
-            }, 3000);
-          }
-        });
-      }
-
-      // File upload feedback
-      const fileInput = document.getElementById('resume-upload');
-      if (fileInput) {
-        fileInput.addEventListener('change', function(e) {
-          const file = e.target.files[0];
-          const helpText = this.parentNode.querySelector('.text-gray-400');
-          
-          if (file) {
-            const fileSize = (file.size / 1024 / 1024).toFixed(2); // Size in MB
-            helpText.innerHTML = `Selected: <span class="text-green-400">${file.name}</span> (${fileSize} MB)`;
-            helpText.classList.remove('text-gray-400');
-            helpText.classList.add('text-green-400');
-          } else {
-            helpText.textContent = 'Accepted formats: PDF, DOC, DOCX (Max size: 2MB)';
-            helpText.classList.remove('text-green-400');
-            helpText.classList.add('text-gray-400');
-          }
-        });
-      }
-
-      // Job details toggle functionality
-      const detailButtons = document.querySelectorAll('.job-details-btn');
-      
-      detailButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const jobId = this.getAttribute('data-job-id');
-          const detailsDiv = document.getElementById(`job-${jobId}`);
-          
-          if (detailsDiv) {
-            detailsDiv.classList.toggle('hidden');
-            
-            // Update button text
-            if (detailsDiv.classList.contains('hidden')) {
-              this.textContent = 'View Details';
-            } else {
-              this.textContent = 'Hide Details';
-            }
-          }
-        });
-      });
-    });
-  </script>
 </Layout>

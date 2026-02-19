@@ -5,140 +5,359 @@ import Footer from '../components/Footer.astro';
 import { bootcamps, successStories, features, faqs } from '../data/bootcamps.js';
 
 const base = import.meta.env.BASE_URL;
-// Ensure base ends with slash for proper concatenation
 const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <Layout title="Bootcamps - Drona Intelligence">
   <Navigation />
   
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-5xl md:text-6xl font-space font-bold gradient-text mb-6">Tech Bootcamps</h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-        Intensive, hands-on training programs designed to accelerate your career in AI, software development, and emerging technologies
-      </p>
+  <!-- Hero Section - Immersive Design -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+    <div class="absolute inset-0 overflow-hidden">
+      <!-- Animated Grid Background -->
+      <div class="absolute inset-0 opacity-20">
+        <div class="grid-pattern"></div>
+      </div>
+      
+      <!-- Floating Orbs -->
+      <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full opacity-30 blur-3xl animate-float"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-red-500 rounded-full opacity-30 blur-3xl animate-float" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-amber-500 rounded-full opacity-20 blur-3xl animate-float" style="animation-delay: 1s;"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
+      <div class="text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/30 backdrop-blur-sm border border-orange-400/50 rounded-full mb-8">
+          <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+          <span class="text-orange-300 text-sm font-semibold tracking-wider uppercase">Transform Your Career</span>
+        </div>
+        
+        <h1 class="text-6xl lg:text-8xl font-sora font-bold text-white mb-8 leading-none">
+          Tech<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Bootcamps</span>
+        </h1>
+        
+        <p class="text-2xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Intensive, hands-on training programs that turn beginners into job-ready professionals in months, not years
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="#programs" 
+            class="inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/50"
+          >
+            Explore Programs
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <a 
+            href="https://calendly.com/dronaintelligence/30min" 
+            class="inline-flex items-center justify-center border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200"
+          >
+            Book Info Session
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 mt-20 max-w-3xl mx-auto">
+          <div class="text-center">
+            <div class="text-4xl lg:text-5xl font-bold text-orange-400 mb-2">100%</div>
+            <div class="text-gray-300 text-sm font-medium">Job Placement Rate</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl lg:text-5xl font-bold text-orange-400 mb-2">12-18</div>
+            <div class="text-gray-300 text-sm font-medium">Weeks to Career</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl lg:text-5xl font-bold text-orange-400 mb-2">90+</div>
+            <div class="text-gray-300 text-sm font-medium">Graduates Hired</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Bootcamp Programs -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Programs Section - Compact Cards -->
+  <section id="programs" class="py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Our Bootcamp Programs</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Choose from our comprehensive range of bootcamps designed for different skill levels and career goals
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Choose Your Path</h2>
+        <p class="text-xl text-gray-600 mb-4">Intensive programs designed to get you job-ready fast</p>
+        <p class="text-gray-600">
+          For detailed course information, email us at 
+          <a href="mailto:info@dronaintelligence.com" class="text-orange-600 font-semibold hover:underline">info@dronaintelligence.com</a> 
+          with the course ID
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {bootcamps.map((bootcamp) => (
-          <div class={`bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700 ${bootcamp.borderColor} transition-all duration-300 hover-glow`}>
-            <div class="flex items-center mb-6">
-              <div class={`w-16 h-16 bg-gradient-to-r ${bootcamp.icon.gradient} rounded-lg flex items-center justify-center mr-4`}>
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <Fragment set:html={bootcamp.icon.svg} />
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold text-white">{bootcamp.title}</h3>
-                <p class={`${bootcamp.textColor} font-semibold`}>{bootcamp.duration} • {bootcamp.schedule}</p>
+          <div class="group relative bg-white rounded-2xl overflow-hidden border-2 border-gray-200 hover:border-orange-300 transition-all duration-300 hover:shadow-xl">
+            <!-- Course ID Badge -->
+            <div class="absolute top-4 right-4 z-10">
+              <div class="px-3 py-1 bg-gray-900 rounded-full">
+                <span class="text-white text-xs font-mono font-semibold tracking-wider">{bootcamp.id.toUpperCase()}</span>
               </div>
             </div>
+
+            <!-- Colored Top Bar -->
+            <div class={`h-2 bg-gradient-to-r ${bootcamp.icon.gradient}`}></div>
             
-            <p class="text-gray-300 mb-6">
-              {bootcamp.description}
-            </p>
-
-            <div class="mb-6">
-              <h4 class="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
-              <ul class="space-y-2 text-gray-300">
-                {bootcamp.curriculum.map((item) => (
-                  <li class="flex items-center">
-                    <svg class="w-4 h-4 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div>
-                <span class="text-3xl font-bold text-white">Rs {bootcamp.price.toLocaleString()}</span>
-                <span class="text-gray-400 ml-2">or Rs {bootcamp.monthlyPrice.toLocaleString()}/month</span>
+            <div class="p-6">
+              <!-- Header -->
+              <div class="flex items-start gap-4 mb-4">
+                <div class={`w-12 h-12 bg-gradient-to-r ${bootcamp.icon.gradient} rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                  {bootcamp.id === 'ai-ml' && (
+                    <span class="text-2xl">🤖</span>
+                  )}
+                  {bootcamp.id === 'fullstack' && (
+                    <span class="text-2xl">💻</span>
+                  )}
+                  {bootcamp.id === 'data-science' && (
+                    <span class="text-2xl">📊</span>
+                  )}
+                  {bootcamp.id === 'cybersecurity' && (
+                    <span class="text-2xl">🔒</span>
+                  )}
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-2xl font-sora font-bold text-gray-900 mb-1">{bootcamp.title}</h3>
+                  <div class="flex items-center gap-2 text-sm">
+                    <span class="text-orange-600 font-semibold">{bootcamp.duration}</span>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-gray-600">{bootcamp.schedule}</span>
+                  </div>
+                </div>
               </div>
-              <a 
-                href="#apply" 
-                class={`${bootcamp.buttonColor} text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow`}
-              >
-                Apply Now
-              </a>
+
+              <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{bootcamp.description}</p>
+
+              <!-- Curriculum - Compact -->
+              <div class="mb-4">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Key Topics</div>
+                <div class="flex flex-wrap gap-2">
+                  {bootcamp.curriculum.slice(0, 3).map((item) => (
+                    <span class="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-medium">
+                      {item.split(' ').slice(0, 2).join(' ')}
+                    </span>
+                  ))}
+                  {bootcamp.curriculum.length > 3 && (
+                    <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">
+                      +{bootcamp.curriculum.length - 3} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <!-- Price & CTA -->
+              <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                <div class="text-lg font-bold text-gray-900">
+                  Rs {bootcamp.price.toLocaleString()}
+                </div>
+                <a 
+                  href="#apply"
+                  class={`inline-flex items-center gap-2 bg-gradient-to-r ${bootcamp.icon.gradient} text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 hover:shadow-lg`}
+                >
+                  Apply Now
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         ))}
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Choose Our Bootcamps -->
-  <section class="py-20 bg-gray-800/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Why Choose Our Bootcamps?</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Our intensive programs are designed to get you job-ready in months, not years
-        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {features.map((feature) => (
-          <div class={`bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 ${feature.borderColor} transition-all duration-300 hover-glow text-center`}>
-            <div class={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-lg flex items-center justify-center mx-auto mb-4`}>
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <Fragment set:html={feature.icon} />
+      <!-- Guarantee Section - Key Marketing -->
+      <div class="mt-16 relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl blur-xl opacity-20"></div>
+        <div class="relative bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-8 lg:p-12 text-white">
+          <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-4">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
+              <span class="font-semibold text-sm uppercase tracking-wider">Our Guarantee</span>
             </div>
-            <h3 class="text-lg font-semibold text-white mb-3">{feature.title}</h3>
-            <p class="text-gray-400 text-sm">
-              {feature.description}
+            <h3 class="text-3xl lg:text-4xl font-sora font-bold mb-4">Career Launch Guarantee</h3>
+            <p class="text-white/90 text-lg max-w-3xl mx-auto">
+              We don't just teach—we launch your career with real-world opportunities
             </p>
           </div>
-        ))}
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Internship Guarantee -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div class="flex items-start gap-4 mb-4">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-xl font-sora font-bold mb-2">6-Month Paid Internship</h4>
+                  <p class="text-white/90 mb-3">Guaranteed placement at one of our partner companies</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold">Full Stack</span>
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold">Data Science</span>
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold">DevOps</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Research Opportunity -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div class="flex items-start gap-4 mb-4">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-xl font-sora font-bold mb-2">Research Team Placement</h4>
+                  <p class="text-white/90 mb-3">Join our research team with potential to publish in prestigious venues</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold">AI & ML</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <p class="text-white/80 text-sm">
+              * Guarantee applies to students who successfully complete the bootcamp and meet performance criteria
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Success Stories -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Why Choose Us - Split Layout with Visual Elements -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-orange-50/30">
+    <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Success Stories</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Hear from our graduates who have transformed their careers through our bootcamp programs
-        </p>
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Why Choose Us?</h2>
+        <p class="text-xl text-gray-600">Everything you need to launch your tech career</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: Visual Element -->
+        <div class="relative">
+          <div class="relative z-10">
+            {features.map((feature, index) => (
+              <div 
+                class={`flex items-start gap-4 mb-8 transform transition-all duration-300 hover:translate-x-2 ${index % 2 === 0 ? '' : 'ml-8'}`}
+                style={`animation-delay: ${index * 0.1}s;`}
+              >
+                <div class={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0`}>
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <Fragment set:html={feature.icon} />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-sora font-bold text-gray-900 mb-2">{feature.title}</h3>
+                  <p class="text-gray-600 leading-relaxed">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Background Decoration -->
+          <div class="absolute top-1/4 -left-8 w-64 h-64 bg-orange-200 rounded-full opacity-20 blur-3xl -z-10"></div>
+          <div class="absolute bottom-1/4 -right-8 w-64 h-64 bg-red-200 rounded-full opacity-20 blur-3xl -z-10"></div>
+        </div>
+
+        <!-- Right: Stats & Highlights -->
+        <div class="space-y-6">
+          <!-- Stat Box 1 -->
+          <div class="bg-white rounded-2xl p-8 border-2 border-orange-100 hover:border-orange-300 transition-colors duration-300 shadow-lg">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="text-5xl">🎓</div>
+              <div>
+                <div class="text-4xl font-bold text-orange-600">90+</div>
+                <div class="text-gray-600 font-medium">Graduates Placed</div>
+              </div>
+            </div>
+            <p class="text-gray-600 text-sm">Our alumni work at top companies worldwide</p>
+          </div>
+
+          <!-- Stat Box 2 -->
+          <div class="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-white shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="text-5xl">💼</div>
+              <div>
+                <div class="text-4xl font-bold">100%</div>
+                <div class="text-white/90 font-medium">Job Placement Rate</div>
+              </div>
+            </div>
+            <p class="text-white/80 text-sm">Within 6 months of graduation</p>
+          </div>
+
+          <!-- Stat Box 3 -->
+          <div class="bg-white rounded-2xl p-8 border-2 border-orange-100 hover:border-orange-300 transition-colors duration-300 shadow-lg">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="text-5xl">⭐</div>
+              <div>
+                <div class="text-4xl font-bold text-orange-600">4.9/5</div>
+                <div class="text-gray-600 font-medium">Student Rating</div>
+              </div>
+            </div>
+            <p class="text-gray-600 text-sm">Based on 200+ verified reviews</p>
+          </div>
+
+          <!-- CTA -->
+          <div class="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200">
+            <p class="text-gray-700 mb-4 font-medium">Ready to join our success stories?</p>
+            <a 
+              href="#apply" 
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg"
+            >
+              Start Your Journey
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories - Testimonial Slider -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-white mb-4">Success Stories</h2>
+        <p class="text-xl text-gray-400">Real graduates, real results</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {successStories.map((story) => (
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <div class="flex items-center mb-6">
-              <div class={`w-16 h-16 bg-gradient-to-r ${story.gradient} rounded-full flex items-center justify-center mr-4`}>
-                <span class="text-white font-bold text-xl">{story.initials}</span>
+          <div class="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-gray-700 hover:border-orange-500 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/20">
+            <!-- Quote Icon -->
+            <div class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+
+            <div class="mt-8 mb-6">
+              <p class="text-gray-300 text-lg leading-relaxed italic">"{story.testimonial}"</p>
+            </div>
+
+            <div class="flex items-center gap-4 pt-6 border-t border-gray-700">
+              <div class={`w-14 h-14 bg-gradient-to-r ${story.gradient} rounded-full flex items-center justify-center`}>
+                <span class="text-white font-bold text-lg">{story.initials}</span>
               </div>
               <div>
-                <h4 class="text-lg font-semibold text-white">{story.name}</h4>
-                <p class={story.textColor}>{story.position}</p>
+                <div class="font-semibold text-white text-lg">{story.name}</div>
+                <div class="text-orange-400 text-sm">{story.position}</div>
               </div>
-            </div>
-            <p class="text-gray-300 mb-4">
-              "{story.testimonial}"
-            </p>
-            <div class="text-yellow-400 text-sm">
-              ★★★★★ {story.bootcamp}
             </div>
           </div>
         ))}
@@ -146,186 +365,179 @@ const basePath = base.endsWith('/') ? base : base + '/';
     </div>
   </section>
 
-  <!-- Application Process -->
-  <section id="apply" class="py-20 bg-gray-800/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Application Section - Modern Form -->
+  <section id="apply" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Application Process</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Ready to start your tech career? Here's how to apply for our bootcamp programs
-        </p>
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Ready to Start?</h2>
+        <p class="text-xl text-gray-600">Apply now and take the first step toward your new career</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+      <!-- Application Process Steps -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
         <div class="text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">1</span>
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-white font-bold text-2xl">1</span>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Apply Online</h3>
-          <p class="text-gray-400 text-sm">Submit your application and tell us about your background and goals.</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Apply</h3>
+          <p class="text-gray-600 text-sm">Submit your application</p>
         </div>
-
         <div class="text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">2</span>
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-white font-bold text-2xl">2</span>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Technical Assessment</h3>
-          <p class="text-gray-400 text-sm">Complete a brief technical assessment to evaluate your current skill level.</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Assessment</h3>
+          <p class="text-gray-600 text-sm">Complete skill evaluation</p>
         </div>
-
         <div class="text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">3</span>
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-white font-bold text-2xl">3</span>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Interview</h3>
-          <p class="text-gray-400 text-sm">Have a conversation with our admissions team about your career goals.</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Interview</h3>
+          <p class="text-gray-600 text-sm">Chat with our team</p>
         </div>
-
         <div class="text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-white font-bold text-xl">4</span>
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-white font-bold text-2xl">4</span>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-2">Start Learning</h3>
-          <p class="text-gray-400 text-sm">Get accepted and begin your journey to a new career in tech!</p>
+          <h3 class="font-semibold text-gray-900 mb-2">Start</h3>
+          <p class="text-gray-600 text-sm">Begin your journey</p>
         </div>
       </div>
 
       <!-- Application Form -->
-      <div class="max-w-2xl mx-auto">
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-          <h3 class="text-2xl font-bold text-white mb-6 text-center">Apply Now</h3>
+      <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl p-8 lg:p-12 border-2 border-orange-100">
+        <form 
+          action="https://formspree.io/f/mqarjyaq" 
+          method="POST" 
+          class="space-y-6"
+          id="bootcamp-application-form"
+        >
+          <input type="hidden" name="form_type" value="bootcamp_application">
+          <input type="hidden" name="_to" value="dronaintelligence@gmail.com">
+          <input type="hidden" name="_subject" value="New Bootcamp Application">
           
-          <form 
-            action="https://formspree.io/f/mqarjyaq" 
-            method="POST" 
-            class="space-y-6"
-            id="bootcamp-application-form"
-          >
-            <!-- Hidden field to identify form type -->
-            <input type="hidden" name="form_type" value="bootcamp_application">
-            <input type="hidden" name="_to" value="dronaintelligence@gmail.com">
-            <input type="hidden" name="_subject" value="New Bootcamp Application">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
-                <input 
-                  type="text" 
-                  name="first_name"
-                  required
-                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                  placeholder="Enter your first name"
-                >
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
-                <input 
-                  type="text" 
-                  name="last_name"
-                  required
-                  class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                  placeholder="Enter your last name"
-                >
-              </div>
-            </div>
-
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+              <label class="block text-sm font-semibold text-gray-900 mb-2">First Name</label>
+              <input 
+                type="text" 
+                name="first_name"
+                required
+                class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+                placeholder="John"
+              >
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-900 mb-2">Last Name</label>
+              <input 
+                type="text" 
+                name="last_name"
+                required
+                class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+                placeholder="Doe"
+              >
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-900 mb-2">Email Address</label>
               <input 
                 type="email" 
                 name="email"
                 required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                placeholder="Enter your email address"
+                class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+                placeholder="john@example.com"
               >
             </div>
-
             <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+              <label class="block text-sm font-semibold text-gray-900 mb-2">Phone Number</label>
               <input 
                 type="tel" 
                 name="phone"
                 required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                placeholder="Enter your phone number"
+                class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+                placeholder="+1 (555) 000-0000"
               >
             </div>
+          </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Preferred Bootcamp</label>
-              <select 
-                name="preferred_bootcamp"
-                required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              >
-                <option value="">Select a bootcamp program</option>
-                {bootcamps.map((bootcamp) => (
-                  <option value={bootcamp.id}>{bootcamp.title}</option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-900 mb-2">Preferred Bootcamp</label>
+            <select 
+              name="preferred_bootcamp"
+              required
+              class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+            >
+              <option value="">Select a program</option>
+              {bootcamps.map((bootcamp) => (
+                <option value={bootcamp.id}>{bootcamp.title} - {bootcamp.duration}</option>
+              ))}
+            </select>
+          </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Current Experience Level</label>
-              <select 
-                name="experience_level"
-                required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-              >
-                <option value="">Select your experience level</option>
-                <option value="beginner">Beginner (No prior experience)</option>
-                <option value="some">Some experience (Self-taught/courses)</option>
-                <option value="intermediate">Intermediate (Some professional experience)</option>
-                <option value="career-change">Career change (Experience in other field)</option>
-              </select>
-            </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-900 mb-2">Experience Level</label>
+            <select 
+              name="experience_level"
+              required
+              class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors"
+            >
+              <option value="">Select your level</option>
+              <option value="beginner">Complete Beginner</option>
+              <option value="some">Some Experience</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="career-change">Career Changer</option>
+            </select>
+          </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-2">Why are you interested in this bootcamp?</label>
-              <textarea 
-                rows="4" 
-                name="motivation"
-                required
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
-                placeholder="Tell us about your goals and motivation..."
-              ></textarea>
-            </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-900 mb-2">Why are you interested?</label>
+            <textarea 
+              rows="4" 
+              name="motivation"
+              required
+              class="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl text-gray-900 focus:border-orange-500 focus:outline-none transition-colors resize-none"
+              placeholder="Tell us about your goals and what you hope to achieve..."
+            ></textarea>
+          </div>
 
-            <div class="text-center">
-              <button 
-                type="submit" 
-                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover-glow transform hover:scale-105"
-                id="submit-btn"
-              >
-                Submit Application
-              </button>
-            </div>
-          </form>
-        </div>
+          <div class="text-center pt-4">
+            <button 
+              type="submit" 
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/50"
+              id="submit-btn"
+            >
+              Submit Application
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
 
   <!-- FAQ Section -->
-  <section class="py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Frequently Asked Questions</h2>
-        <p class="text-xl text-gray-300">
-          Get answers to common questions about our bootcamp programs
-        </p>
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">FAQ</h2>
+        <p class="text-xl text-gray-600">Common questions about our bootcamps</p>
       </div>
 
       <div class="space-y-4">
         {faqs.map((faq, index) => (
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+          <div class="bg-white rounded-2xl border-2 border-orange-100 overflow-hidden hover:border-orange-300 transition-colors">
             <button 
-              class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-800/50 transition-colors duration-200 faq-toggle"
+              class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-orange-50/50 transition-colors faq-toggle"
               data-faq={index}
             >
-              <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+              <h3 class="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
               <svg 
-                class="w-5 h-5 text-gray-400 transform transition-transform duration-200 faq-icon"
+                class="w-6 h-6 text-orange-500 transform transition-transform duration-200 faq-icon flex-shrink-0"
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -334,10 +546,8 @@ const basePath = base.endsWith('/') ? base : base + '/';
               </svg>
             </button>
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-4">
-                <p class="text-gray-300 leading-relaxed">
-                  {faq.answer}
-                </p>
+              <div class="px-8 pb-6">
+                <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
               </div>
             </div>
           </div>
@@ -347,24 +557,24 @@ const basePath = base.endsWith('/') ? base : base + '/';
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-gradient-to-r from-blue-900/50 to-purple-900/50">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-space font-bold text-white mb-6">
-        Ready to Transform Your Career?
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-500 to-red-600">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl lg:text-6xl font-sora font-bold text-white mb-6 leading-tight">
+        Your Future Starts Now
       </h2>
-      <p class="text-xl text-gray-300 mb-8">
-        Join thousands of successful graduates who have launched their tech careers through our bootcamp programs
+      <p class="text-xl text-orange-100 mb-10">
+        Join hundreds of successful graduates who transformed their careers
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
           href="#apply" 
-          class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-xl"
         >
           Apply Now
         </a>
         <a 
           href="https://calendly.com/dronaintelligence/30min" 
-          class="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200"
         >
           Schedule Info Session
         </a>
@@ -375,104 +585,82 @@ const basePath = base.endsWith('/') ? base : base + '/';
   <Footer />
 </Layout>
 
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-20px) translateX(10px); }
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
 <script>
-  // Bootcamp form submission handling
-  document.getElementById('bootcamp-application-form').addEventListener('submit', function(e) {
-    const submitBtn = document.getElementById('submit-btn');
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
-    
-    // Show success message after form submission
-    setTimeout(() => {
-      // This will be handled by Formspree's redirect or you can customize
-      alert('Thank you for your application! We will review it and get back to you soon.');
-    }, 1000);
-  });
-
-  // Handle form success (if using Formspree's AJAX submission)
-  window.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('bootcamp-application-form');
-    
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(form);
-      const submitBtn = document.getElementById('submit-btn');
-      
-      try {
-        submitBtn.textContent = 'Submitting...';
-        submitBtn.disabled = true;
-        
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        if (response.ok) {
-          // Success
-          form.reset();
-          submitBtn.textContent = 'Application Submitted!';
-          submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-          submitBtn.classList.add('bg-green-600');
-          
-          // Show success message
-          const successDiv = document.createElement('div');
-          successDiv.className = 'mt-4 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-400 text-center';
-          successDiv.innerHTML = `
-            <div class="flex items-center justify-center mb-2">
-              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              Application Submitted Successfully!
-            </div>
-            <p class="text-sm">Thank you for your interest in our bootcamp program. We'll review your application and get back to you within 2-3 business days.</p>
-          `;
-          form.parentNode.appendChild(successDiv);
-          
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            submitBtn.textContent = 'Submit Application';
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('bg-green-600');
-            submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-          }, 3000);
-          
-        } else {
-          throw new Error('Form submission failed');
-        }
-        
-      } catch (error) {
-        // Error handling
-        submitBtn.textContent = 'Submission Failed - Try Again';
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('bg-blue-600');
-        submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
-        
-        // Reset button after 3 seconds
-        setTimeout(() => {
-          submitBtn.textContent = 'Submit Application';
-          submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
-          submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-        }, 3000);
-      }
-    });
-  });
-
-  // FAQ Accordion functionality
+  // Form submission
   document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('bootcamp-application-form');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    if (form && submitBtn) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        
+        try {
+          submitBtn.innerHTML = '<span>Submitting...</span>';
+          submitBtn.disabled = true;
+          
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+          
+          if (response.ok) {
+            form.reset();
+            submitBtn.innerHTML = '✓ Application Submitted!';
+            submitBtn.classList.remove('from-orange-500', 'to-red-500');
+            submitBtn.classList.add('from-green-500', 'to-green-600');
+            
+            setTimeout(() => {
+              submitBtn.innerHTML = 'Submit Application <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>';
+              submitBtn.disabled = false;
+              submitBtn.classList.remove('from-green-500', 'to-green-600');
+              submitBtn.classList.add('from-orange-500', 'to-red-500');
+            }, 3000);
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (error) {
+          submitBtn.innerHTML = 'Failed - Try Again';
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    // FAQ Accordion
     const faqToggles = document.querySelectorAll('.faq-toggle');
     
     faqToggles.forEach(toggle => {
       toggle.addEventListener('click', function() {
-        const faqIndex = this.getAttribute('data-faq');
         const content = this.nextElementSibling;
         const icon = this.querySelector('.faq-icon');
         
         // Close all other FAQs
-        faqToggles.forEach((otherToggle, index) => {
+        faqToggles.forEach((otherToggle) => {
           if (otherToggle !== this) {
             const otherContent = otherToggle.nextElementSibling;
             const otherIcon = otherToggle.querySelector('.faq-icon');
@@ -483,11 +671,9 @@ const basePath = base.endsWith('/') ? base : base + '/';
         
         // Toggle current FAQ
         if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-          // Close
           content.style.maxHeight = '0px';
           icon.style.transform = 'rotate(0deg)';
         } else {
-          // Open
           content.style.maxHeight = content.scrollHeight + 'px';
           icon.style.transform = 'rotate(180deg)';
         }

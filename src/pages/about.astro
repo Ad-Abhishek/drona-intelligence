@@ -4,369 +4,293 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL;
-// Ensure base ends with slash for proper concatenation
 const basePath = base.endsWith('/') ? base : base + '/';
 ---
 
 <Layout title="About Us - Drona Intelligence">
   <Navigation />
   
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-5xl md:text-6xl font-space font-bold gradient-text mb-6">About Drona Intelligence</h1>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-        Pioneering the future of technology through innovative AI solutions and cutting-edge software development
+  <!-- Hero Section with Parallax Effect -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center relative z-10">
+      <div class="inline-block mb-6">
+        <span class="text-orange-600 text-sm font-semibold tracking-wider uppercase">About Us</span>
+      </div>
+      <h1 class="text-6xl lg:text-9xl font-sora font-bold text-gray-900 mb-8 leading-none">
+        Drona<br/>
+        <span class="text-orange-600">Intelligence</span>
+      </h1>
+      <p class="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Where ancient wisdom meets modern technology
       </p>
     </div>
+
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200 rounded-full opacity-20 blur-3xl animate-float"></div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-red-200 rounded-full opacity-20 blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-amber-200 rounded-full opacity-20 blur-3xl animate-float" style="animation-delay: 1s;"></div>
   </section>
 
-  <!-- Company Vision & Mission -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  <!-- Story Section - Horizontal Scroll Concept -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+        <div class="order-2 lg:order-1">
+          <div class="relative">
+            <div class="absolute -top-8 -left-8 text-9xl font-bold text-orange-100 select-none">01</div>
+            <div class="relative bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl p-12 text-white">
+              <h2 class="text-4xl font-sora font-bold mb-6">Our Story</h2>
+              <p class="text-lg leading-relaxed text-white/90 mb-4">
+                It started in a small garage in San Antonio with three engineers, countless cups of coffee, and a simple question: Why is cutting-edge AI only accessible to tech giants?
+              </p>
+              <p class="text-lg leading-relaxed text-white/90">
+                We built Drona Intelligence to democratize artificial intelligence—making powerful technology accessible to businesses of all sizes. Today, we're proud to help companies transform their operations with intelligent solutions that actually work.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="aspect-square bg-gradient-to-br from-orange-100 to-red-100 rounded-3xl flex items-center justify-center">
+            <div class="text-center p-8">
+              <div class="text-7xl mb-4">🎯</div>
+              <div class="text-2xl font-sora font-bold text-gray-900">Founded 2019</div>
+              <div class="text-gray-600 mt-2">San Antonio, Texas</div>
+              <div class="text-gray-600 mt-1 text-sm">Offshore Office: Pokhara, Nepal (Founded 2021)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
         <div>
-          <h2 class="text-4xl font-space font-bold gradient-text mb-8">Our Vision</h2>
-          <p class="text-lg text-gray-300 mb-6">
-            To be the leading force in democratizing artificial intelligence and advanced software solutions, 
-            making cutting-edge technology accessible to businesses of all sizes across the globe.
-          </p>
-          <p class="text-lg text-gray-300">
-            We envision a world where every organization can harness the power of AI to drive innovation, 
-            improve efficiency, and create meaningful impact in their respective industries.
-          </p>
+          <div class="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 rounded-3xl flex items-center justify-center">
+            <div class="text-center p-8">
+              <div class="text-7xl mb-4">🚀</div>
+              <div class="text-2xl font-sora font-bold text-gray-900">50+ Projects</div>
+              <div class="text-gray-600 mt-2">Delivered Successfully</div>
+            </div>
+          </div>
         </div>
-        <div class="relative">
-          <div class="bg-gradient-to-br from-blue-900/50 to-purple-900/50 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-4">Our Mission</h3>
-            <p class="text-gray-300 mb-4">
-              To empower businesses through innovative technology solutions that drive growth, efficiency, and competitive advantage.
-            </p>
-            <ul class="space-y-2 text-gray-300">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Deliver exceptional AI and software solutions
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Foster innovation and continuous learning
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Build long-term partnerships with our clients
-              </li>
-            </ul>
+        <div>
+          <div class="relative">
+            <div class="absolute -top-8 -right-8 text-9xl font-bold text-orange-100 select-none">02</div>
+            <div class="relative bg-white border-2 border-orange-200 rounded-3xl p-12">
+              <h2 class="text-4xl font-sora font-bold text-gray-900 mb-6">Our Mission</h2>
+              <p class="text-lg leading-relaxed text-gray-600 mb-4">
+                To democratize artificial intelligence and make cutting-edge technology accessible to businesses of all sizes.
+              </p>
+              <p class="text-lg leading-relaxed text-gray-600">
+                We believe every organization deserves the power to innovate, automate, and thrive in the digital age.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Company Values -->
-  <section class="py-20 bg-gray-800/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Our Core Values</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          These principles guide everything we do and shape our company culture
-        </p>
+  <!-- Values Section - Circular Layout -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-orange-50/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Our Values</h2>
+        <p class="text-xl text-gray-600">The principles that guide everything we do</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
+      <div class="relative max-w-5xl mx-auto">
+        <!-- Center Circle -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center shadow-2xl z-10">
+          <div class="text-center text-white">
+            <div class="text-3xl font-sora font-bold">Drona</div>
+            <div class="text-sm">Intelligence</div>
           </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Innovation</h3>
-          <p class="text-gray-400 text-sm">
-            Constantly pushing boundaries and exploring new technologies to deliver cutting-edge solutions.
-          </p>
         </div>
 
-        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Excellence</h3>
-          <p class="text-gray-400 text-sm">
-            Committed to delivering the highest quality solutions that exceed client expectations.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Collaboration</h3>
-          <p class="text-gray-400 text-sm">
-            Working together as a team and with our clients to achieve shared success and goals.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white mb-3">Integrity</h3>
-          <p class="text-gray-400 text-sm">
-            Maintaining transparency, honesty, and ethical practices in all our business relationships.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Company Policies -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Company Policies</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Our commitment to creating a positive, inclusive, and productive work environment
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="space-y-8">
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
-              <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+        <!-- Value Cards Orbiting -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+          <!-- Innovation -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-orange-100 hover:border-orange-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
-              Diversity & Inclusion
-            </h3>
-            <p class="text-gray-300 mb-4">
-              We are committed to fostering a diverse and inclusive workplace where everyone feels valued, respected, and empowered to contribute their best work.
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li>• Equal opportunity employment practices</li>
-              <li>• Zero tolerance for discrimination or harassment</li>
-              <li>• Inclusive hiring and promotion processes</li>
-              <li>• Regular diversity and inclusion training</li>
-            </ul>
+            </div>
+            <h3 class="text-2xl font-sora font-bold text-gray-900 mb-3">Innovation</h3>
+            <p class="text-gray-600">Constantly pushing boundaries and exploring new technologies</p>
           </div>
 
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
-              <svg class="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <!-- Excellence -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-orange-100 hover:border-orange-300 md:mt-32">
+            <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-sora font-bold text-gray-900 mb-3">Excellence</h3>
+            <p class="text-gray-600">Delivering the highest quality solutions that exceed expectations</p>
+          </div>
+
+          <!-- Collaboration -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-orange-100 hover:border-orange-300 md:mt-16">
+            <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-sora font-bold text-gray-900 mb-3">Collaboration</h3>
+            <p class="text-gray-600">Working together to achieve shared success and goals</p>
+          </div>
+
+          <!-- Integrity -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-orange-100 hover:border-orange-300 md:mt-48">
+            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
-              Data Privacy & Security
-            </h3>
-            <p class="text-gray-300 mb-4">
-              We maintain the highest standards of data protection and cybersecurity to safeguard our clients' information and our intellectual property.
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li>• GDPR and CCPA compliance</li>
-              <li>• Regular security audits and assessments</li>
-              <li>• Employee security training programs</li>
-              <li>• Secure development practices</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="space-y-8">
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
-              <svg class="w-6 h-6 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-              </svg>
-              Professional Development
-            </h3>
-            <p class="text-gray-300 mb-4">
-              We invest in our team's growth through continuous learning opportunities, skill development programs, and career advancement support.
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li>• Annual learning and development budget</li>
-              <li>• Conference and workshop attendance</li>
-              <li>• Internal mentorship programs</li>
-              <li>• Certification and training support</li>
-            </ul>
-          </div>
-
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
-              <svg class="w-6 h-6 text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              Work-Life Balance
-            </h3>
-            <p class="text-gray-300 mb-4">
-              We believe that a healthy work-life balance is essential for both personal well-being and professional success.
-            </p>
-            <ul class="space-y-2 text-gray-400">
-              <li>• Flexible working hours and remote options</li>
-              <li>• Generous vacation and personal time off</li>
-              <li>• Mental health and wellness programs</li>
-              <li>• Family-friendly policies and benefits</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partners Section -->
-  <section class="py-20 bg-gray-800/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Our Partners</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          We collaborate with industry leaders to deliver comprehensive solutions
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Technology Partners</h3>
-          <p class="text-gray-400">
-            Strategic partnerships with leading cloud providers, AI platforms, and software vendors to deliver cutting-edge solutions.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Industry Partners</h3>
-          <p class="text-gray-400">
-            Collaborations with organizations across various industries to understand sector-specific challenges and requirements.
-          </p>
-        </div>
-
-        <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300 hover-glow text-center">
-          <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-white mb-3">Academic Partners</h3>
-          <p class="text-gray-400">
-            Partnerships with universities and research institutions to stay at the forefront of technological advancement and innovation.
-          </p>
-        </div>
-      </div>
-
-      <!-- Partner Logos Placeholder -->
-      <div class="text-center">
-        <p class="text-gray-400 mb-8">Trusted by leading organizations worldwide</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60">
-          {Array.from({length: 6}).map((_, i) => (
-            <div class="bg-gray-800 h-16 rounded-lg flex items-center justify-center">
-              <span class="text-gray-500 font-semibold">Partner {i + 1}</span>
             </div>
-          ))}
+            <h3 class="text-2xl font-sora font-bold text-gray-900 mb-3">Integrity</h3>
+            <p class="text-gray-600">Maintaining transparency and ethical practices always</p>
+          </div>
         </div>
       </div>
-
-
     </div>
   </section>
 
-  <!-- Location Section -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Team Section - Magazine Style -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-space font-bold gradient-text mb-4">Our Location</h2>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Headquartered in the heart of the tech innovation district
-        </p>
+        <h2 class="text-5xl lg:text-6xl font-sora font-bold text-gray-900 mb-4">Meet the Team</h2>
+        <p class="text-xl text-gray-600">The brilliant minds behind Drona Intelligence</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Team Member 1 -->
+        <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-100 to-red-100 aspect-square hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 flex flex-col justify-end p-8">
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 class="text-2xl font-sora font-bold text-gray-900 mb-1">Leadership</h3>
+              <p class="text-orange-600 font-medium mb-2">Founders & Executives</p>
+              <p class="text-gray-600 text-sm">Visionaries driving innovation</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-100 to-orange-100 aspect-square hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 flex flex-col justify-end p-8">
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 class="text-2xl font-sora font-bold text-gray-900 mb-1">Engineering</h3>
+              <p class="text-orange-600 font-medium mb-2">Developers & Architects</p>
+              <p class="text-gray-600 text-sm">Building the future</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-100 to-orange-100 aspect-square hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 flex flex-col justify-end p-8">
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 class="text-2xl font-sora font-bold text-gray-900 mb-1">Design & Product</h3>
+              <p class="text-orange-600 font-medium mb-2">Creators & Strategists</p>
+              <p class="text-gray-600 text-sm">Crafting experiences</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href={`${basePath}career/`}
+          class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/30"
+        >
+          Join Our Team
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section - Split Design -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl border border-gray-700">
-            <h3 class="text-2xl font-bold text-white mb-6">Headquarters</h3>
-            
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-blue-400 mr-4 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h2 class="text-5xl font-sora font-bold text-white mb-8">Where We Are</h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                <div>
-                  <h4 class="text-white font-semibold">Address</h4>
-                  <p class="text-gray-300">San Antonio, Texas 78154</p>
-                </div>
               </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-white mb-2">Headquarters</h3>
+                <p class="text-gray-400">San Antonio, Texas 78154</p>
+              </div>
+            </div>
 
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-blue-400 mr-4 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
-                <div>
-                  <h4 class="text-white font-semibold">Phone</h4>
-                  <p class="text-gray-300">+1 469 782-1014</p>
-                </div>
               </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-white mb-2">Phone</h3>
+                <p class="text-gray-400">+1 469 782-1014</p>
+              </div>
+            </div>
 
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-blue-400 mr-4 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                <div>
-                  <h4 class="text-white font-semibold">Email</h4>
-                  <p class="text-gray-300">info@dronaintelligence.com</p>
-                </div>
               </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-white mb-2">Email</h3>
+                <p class="text-gray-400">info@dronaintelligence.com</p>
+              </div>
+            </div>
 
-              <div class="flex items-start">
-                <svg class="w-6 h-6 text-blue-400 mr-4 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <div>
-                  <h4 class="text-white font-semibold">Business Hours</h4>
-                  <p class="text-gray-300">Monday - Friday: 9:00 AM - 5:00 PM<br>Saturday, Sunday: Closed</p>
-                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-sora font-bold text-white mb-2">Business Hours</h3>
+                <p class="text-gray-400">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                <p class="text-gray-400">Saturday, Sunday: Closed</p>
               </div>
             </div>
+          </div>
 
-            <div class="mt-8">
-              <a 
-                href="https://calendly.com/dronaintelligence/30min" 
-                class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover-glow"
-              >
-                Schedule a Visit
-                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </a>
-            </div>
+          <div class="mt-8">
+            <a 
+              href="https://calendly.com/dronaintelligence/30min" 
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/50"
+            >
+              Schedule a Visit
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
           </div>
         </div>
 
-        <div>
-          <!-- Map Placeholder -->
-          <div class="bg-gray-800 rounded-2xl border border-gray-700 h-96 flex items-center justify-center">
-            <div class="text-center">
-              <svg class="w-16 h-16 text-gray-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <p class="text-gray-400">Interactive Map</p>
-              <p class="text-gray-500 text-sm">San Antonio, Texas 78154</p>
-            </div>
+        <div class="bg-gray-800 rounded-3xl p-12 border border-gray-700">
+          <div class="text-center">
+            <div class="text-8xl mb-6">📍</div>
+            <h3 class="text-3xl font-sora font-bold text-white mb-4">San Antonio, Texas</h3>
+            <p class="text-gray-400 text-lg">
+              Located in the heart of Texas, serving clients worldwide
+            </p>
           </div>
         </div>
       </div>
@@ -374,24 +298,24 @@ const basePath = base.endsWith('/') ? base : base + '/';
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-gradient-to-r from-blue-900/50 to-purple-900/50">
-    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-space font-bold text-white mb-6">
-        Ready to Work Together?
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 to-red-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl lg:text-6xl font-sora font-bold text-gray-900 mb-6 leading-tight">
+        Let's Build Something Amazing
       </h2>
-      <p class="text-xl text-gray-300 mb-8">
-        Let's discuss how we can help transform your business with innovative technology solutions
+      <p class="text-xl text-gray-600 mb-10">
+        Ready to transform your business with intelligent solutions?
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
           href="https://calendly.com/dronaintelligence/30min" 
-          class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 hover:shadow-2xl hover:shadow-orange-500/30"
         >
           Schedule Consultation
         </a>
         <a 
           href={`${basePath}services/`} 
-          class="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center border-2 border-gray-300 text-gray-700 hover:border-orange-500 hover:text-orange-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200"
         >
           View Our Services
         </a>
@@ -401,3 +325,14 @@ const basePath = base.endsWith('/') ? base : base + '/';
 
   <Footer />
 </Layout>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>
