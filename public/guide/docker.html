@@ -2009,6 +2009,9 @@ services:
             if (sections[index]) {
                 sections[index].classList.add('active');
                 buttons[index].classList.add('active');
+                console.log('Active class added to section', index);
+                console.log('Section has active class:', sections[index].classList.contains('active'));
+                console.log('Section display style:', window.getComputedStyle(sections[index]).display);
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
