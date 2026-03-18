@@ -101,7 +101,9 @@
         }
 
         .section.active {
-            display: block;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         @keyframes fadeIn {
@@ -1997,10 +1999,6 @@ services:
             const sections = document.querySelectorAll('.section');
             const buttons = document.querySelectorAll('.nav-btn');
             
-            console.log('Total sections:', sections.length);
-            console.log('Requested index:', index);
-            console.log('Section exists:', !!sections[index]);
-            
             sections.forEach((section, i) => {
                 section.classList.remove('active');
                 buttons[i].classList.remove('active');
@@ -2009,16 +2007,6 @@ services:
             if (sections[index]) {
                 sections[index].classList.add('active');
                 buttons[index].classList.add('active');
-                console.log('Active class added to section', index);
-                console.log('Section has active class:', sections[index].classList.contains('active'));
-                console.log('Section display style:', window.getComputedStyle(sections[index]).display);
-                
-                // Check if content is actually there
-                const rect = sections[index].getBoundingClientRect();
-                console.log('Section dimensions:', rect.width, 'x', rect.height);
-                console.log('Section position:', rect.top, rect.left);
-                console.log('Section innerHTML length:', sections[index].innerHTML.length);
-                console.log('First 200 chars of content:', sections[index].innerHTML.substring(0, 200));
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
