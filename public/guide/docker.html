@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Complete Learning Material - DRONA Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --docker-blue: #0db7ed;
+            --docker-dark: #003f5c;
+            --drona-primary: #667eea;
+            --drona-secondary: #764ba2;
+            --bg-light: #f8f9fa;
+            --text-dark: #2c3e50;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--drona-primary), var(--drona-secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .nav {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0 2rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--drona-primary), var(--drona-secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn.active {
+            background: var(--docker-dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            color: var(--drona-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--drona-primary);
+            font-size: 2em;
+        }
+
+        .card h3 {
+            color: var(--docker-dark);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5em;
+        }
+
+        .visual-diagram {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px dashed var(--drona-primary);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--drona-primary), var(--drona-secondary));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background: #e0e7ff;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #10b981;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .code-block::before {
+            content: 'Terminal';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--drona-primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0 10px 0 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .code-comment {
+            color: #64748b;
+        }
+
+        .command {
+            color: #60a5fa;
+        }
+
+        .info-box {
+            background: #dbeafe;
+            border-left: 5px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .info-box h4 {
+            color: #3b82f6;
+            margin-bottom: 0.75rem;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h4 {
+            color: #f59e0b;
+            margin-bottom: 0.75rem;
+        }
+
+        .success-box {
+            background: #d1fae5;
+            border-left: 5px solid #10b981;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box h4 {
+            color: #10b981;
+            margin-bottom: 0.75rem;
+        }
+
+        .accordion {
+            background: white;
+            border: 2px solid var(--drona-primary);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, var(--drona-primary), var(--drona-secondary));
+            color: white;
+            padding: 1.25rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, var(--drona-secondary), var(--drona-primary));
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.25rem;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+            padding: 1.25rem;
+        }
+
+        .dockerfile-keyword {
+            background: #f1f5f9;
+            padding: 2rem;
+            border-left: 4px solid var(--docker-blue);
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .dockerfile-keyword h4 {
+            color: var(--docker-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.2em;
+        }
+
+        .command-reference {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .command-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .command-card:hover {
+            border-color: var(--drona-primary);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .command-card h4 {
+            color: var(--drona-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .command-card code {
+            background: #f1f5f9;
+            padding: 0.5rem;
+            border-radius: 4px;
+            display: block;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            color: var(--docker-dark);
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .box {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            margin: 0.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box-client {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .box-daemon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .box-registry {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .box-container {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: var(--drona-primary);
+            margin: 0 1rem;
+        }
+
+        .flow-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--drona-primary), var(--drona-secondary));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .comparison-table {
+                font-size: 0.9em;
+            }
+
+            .command-reference {
+                grid-template-columns: 1fr;
+            }
+
+            .box {
+                margin: 0.5rem;
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐳 Docker Complete Learning Material</h1>
+        <p>Comprehensive Guide to Containerization & Docker</p>
+        <p style="font-size: 0.9em; margin-top: 0.5rem;">By DRONA Intelligence | office@dronaintelligence.com</p>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection(0)">Introduction</button>
+            <button class="nav-btn" onclick="showSection(1)">Installation</button>
+            <button class="nav-btn" onclick="showSection(2)">Basic Commands</button>
+            <button class="nav-btn" onclick="showSection(3)">Dockerfile</button>
+            <button class="nav-btn" onclick="showSection(4)">Applications</button>
+            <button class="nav-btn" onclick="showSection(5)">Networking</button>
+            <button class="nav-btn" onclick="showSection(6)">Volumes</button>
+            <button class="nav-btn" onclick="showSection(7)">Docker Compose</button>
+            <button class="nav-btn" onclick="showSection(8)">Docker Swarm</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Section 0: Introduction -->
+        <div class="section active">
+            <div class="card">
+                <h2>📘 What is Docker?</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Docker is a platform that provides virtual containers on which an application can be deployed 
+                    independent of the underlying OS of the server. The container can be created from a replica 
+                    called docker image which contains all the dependencies and can run on any OS that has docker 
+                    engine, with similar results.
+                </p>
+
+                <div class="visual-diagram">
+                    <h3 style="text-align: center; color: var(--drona-primary); margin-bottom: 2rem;">Docker Architecture</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-vertical">
+                            <div class="box box-client">Docker Client</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box box-daemon">Docker Daemon (dockerd)</div>
+                            <div class="arrow">⬇️</div>
+                            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                <div class="box box-container">Images</div>
+                                <div class="box box-container">Containers</div>
+                                <div class="box box-container">Networks</div>
+                                <div class="box box-container">Volumes</div>
+                            </div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box box-registry">Docker Registry (Docker Hub)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🔄 Virtualization vs Containerization</h2>
+                
+                <h3>Virtualization</h3>
+                <p>Virtualization is the process of sharing hardware resources across several virtually isolated 
+                and mutually independent systems. It is achieved using a hypervisor which acts as a bridge between 
+                the Operating System of each virtual machine and the underlying hardware.</p>
+
+                <div class="info-box">
+                    <h4>Key Characteristics</h4>
+                    <ul>
+                        <li>Applications run on host OS on top of hypervisor</li>
+                        <li>Each VM has its own full OS</li>
+                        <li>Heavy resource consumption</li>
+                        <li>Slower startup times</li>
+                    </ul>
+                </div>
+
+                <h3>Containerization</h3>
+                <p>Containerization refers to the process of creating virtually isolated instances of applications 
+                along with required dependencies called containers. Containers are independent of the underlying OS 
+                and are portable from one OS to another.</p>
+
+                <div class="success-box">
+                    <h4>Key Advantages</h4>
+                    <ul>
+                        <li>Lightweight - shares host OS kernel</li>
+                        <li>Fast startup (seconds vs minutes)</li>
+                        <li>Portable across different environments</li>
+                        <li>Better resource utilization</li>
+                        <li>Consistent development to production environment</li>
+                    </ul>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Virtual Machines</th>
+                            <th>Docker Containers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OS</strong></td>
+                            <td>Each VM has full OS</td>
+                            <td>Shares host OS kernel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Size</strong></td>
+                            <td>GBs</td>
+                            <td>MBs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Startup Time</strong></td>
+                            <td>Minutes</td>
+                            <td>Seconds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>Slower</td>
+                            <td>Near-native</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Isolation</strong></td>
+                            <td>Complete</td>
+                            <td>Process-level</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portability</strong></td>
+                            <td>Limited</td>
+                            <td>High</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>🧩 Docker Components</h2>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Docker Daemon (dockerd)</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.</p>
+                        <div class="info-box">
+                            <p><strong>Key Functions:</strong></p>
+                            <ul>
+                                <li>Manages container lifecycle</li>
+                                <li>Builds images from Dockerfiles</li>
+                                <li>Handles networking between containers</li>
+                                <li>Manages data volumes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Docker Client</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The Docker client (docker) is the primary way that users interact with Docker. When you use commands such as <code>docker run</code>, the client sends these commands to dockerd, which carries them out. The docker command uses the Docker API.</p>
+                        <div class="code-block">
+$ docker run nginx
+$ docker build -t myapp .
+$ docker ps
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Docker Registry</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default.</p>
+                        <div class="success-box">
+                            <p><strong>Popular Docker Registries:</strong></p>
+                            <ul>
+                                <li><strong>Docker Hub:</strong> https://hub.docker.com (Public)</li>
+                                <li><strong>AWS ECR:</strong> Amazon Elastic Container Registry</li>
+                                <li><strong>Google GCR:</strong> Google Container Registry</li>
+                                <li><strong>Microsoft ACR:</strong> Azure Container Registry</li>
+                                <li><strong>Harbor:</strong> Open-source cloud native registry</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Docker Objects (Images, Containers, Networks, Volumes)</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4 style="color: var(--drona-primary); margin-top: 1rem;">Images</h4>
+                        <p>A read-only template with instructions for creating a Docker container. Images are built in layers - each instruction in a Dockerfile creates a new layer.</p>
+                        
+                        <h4 style="color: var(--drona-primary); margin-top: 1rem;">Containers</h4>
+                        <p>A runnable instance of an image. Container is the runtime instance of our application with all dependencies.</p>
+                        
+                        <h4 style="color: var(--drona-primary); margin-top: 1rem;">Networks</h4>
+                        <p>Enable communication between containers and the outside world. Provide isolated network environments.</p>
+                        
+                        <h4 style="color: var(--drona-primary); margin-top: 1rem;">Volumes</h4>
+                        <p>Used to persist and share data between containers and the host machine. Data survives container lifecycle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Installation -->
+        <div class="section">
+            <div class="card">
+                <h2>⚙️ Docker Installation (Linux)</h2>
+                
+                <div class="warning-box">
+                    <h4>Prerequisites</h4>
+                    <ul>
+                        <li>AWS account (or any cloud provider)</li>
+                        <li>Linux VM (Amazon Linux AMI recommended)</li>
+                        <li>SSH client (MobaXterm, PuTTY, or terminal)</li>
+                    </ul>
+                </div>
+
+                <h3>Step-by-Step Installation</h3>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Step 1: Create Linux Virtual Machine</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ol>
+                            <li>Login to AWS account</li>
+                            <li>Navigate to EC2 Dashboard</li>
+                            <li>Click "Launch Instance"</li>
+                            <li>Select Amazon Linux AMI</li>
+                            <li>Choose instance type (t2.micro for testing)</li>
+                            <li>Configure security group (allow SSH port 22)</li>
+                            <li>Launch and download key pair</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Step 2: Connect to Linux VM</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Use MobaXterm, PuTTY, or terminal to SSH into your instance:</p>
+                        <div class="code-block">
+$ ssh -i your-key.pem ec2-user@your-instance-ip
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Step 3: Install Docker</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="code-block">
+<span class="code-comment"># Update system packages</span>
+$ sudo yum update -y
+
+<span class="code-comment"># Install Docker</span>
+$ sudo yum install docker -y
+
+<span class="code-comment"># Start Docker service</span>
+$ sudo service docker start
+<span class="code-comment"># OR</span>
+$ sudo systemctl start docker
+
+<span class="code-comment"># Enable Docker to start on boot</span>
+$ sudo systemctl enable docker
+
+<span class="code-comment"># Add ec2-user to docker group</span>
+$ sudo usermod -aG docker $USER
+
+<span class="code-comment"># Exit terminal</span>
+$ exit
+
+<span class="code-comment"># Restart session (Press 'R' in MobaXterm)</span>
+
+<span class="code-comment"># Verify Docker installation</span>
+$ docker info
+$ docker --version
+                        </div>
+
+                        <div class="success-box">
+                            <h4>✅ Installation Complete!</h4>
+                            <p>If you see Docker version and system info, installation was successful!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Basic Commands -->
+        <div class="section">
+            <div class="card">
+                <h2>🚀 Essential Docker Commands</h2>
+
+                <div class="command-reference">
+                    <div class="command-card">
+                        <h4>View Images</h4>
+                        <p>Display all Docker images on your machine</p>
+                        <code>$ docker images</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Pull Image</h4>
+                        <p>Download an image from Docker Hub</p>
+                        <code>$ docker pull &lt;image-name&gt;</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Example:</p>
+                        <code>$ docker pull nginx</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Run Container</h4>
+                        <p>Create and start a container from an image</p>
+                        <code>$ docker run &lt;image-name&gt;</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">With port mapping:</p>
+                        <code>$ docker run -p 8080:80 nginx</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>List Running Containers</h4>
+                        <p>Display all active containers</p>
+                        <code>$ docker ps</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">All containers (including stopped):</p>
+                        <code>$ docker ps -a</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Stop Container</h4>
+                        <p>Stop a running container gracefully</p>
+                        <code>$ docker stop &lt;container-id&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Container</h4>
+                        <p>Delete a stopped container</p>
+                        <code>$ docker rm &lt;container-id&gt;</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Force remove:</p>
+                        <code>$ docker rm -f &lt;container-id&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Image</h4>
+                        <p>Delete a Docker image</p>
+                        <code>$ docker rmi &lt;image-id&gt;</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Force remove:</p>
+                        <code>$ docker rmi -f &lt;image-id&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>System Cleanup</h4>
+                        <p>Remove all stopped containers, unused images, and networks</p>
+                        <code>$ docker system prune -a</code>
+                        <div class="warning-box" style="margin-top: 1rem; font-size: 0.9em;">
+                            <p><strong>⚠️ Warning:</strong> This will remove ALL unused Docker resources!</p>
+                        </div>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>View Logs</h4>
+                        <p>Check container logs</p>
+                        <code>$ docker logs &lt;container-id&gt;</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Follow logs:</p>
+                        <code>$ docker logs -f &lt;container-id&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Execute Commands</h4>
+                        <p>Run commands inside a container</p>
+                        <code>$ docker exec -it &lt;container-id&gt; /bin/bash</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Type 'exit' to leave container</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Inspect Container</h4>
+                        <p>View detailed container information</p>
+                        <code>$ docker inspect &lt;container-id&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Container Stats</h4>
+                        <p>Monitor container resource usage</p>
+                        <code>$ docker stats</code>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Pro Tips</h4>
+                    <ul>
+                        <li>Use <code>-d</code> flag to run containers in detached mode (background)</li>
+                        <li>Use <code>--name</code> to give containers meaningful names</li>
+                        <li>Use <code>-p host:container</code> for port mapping</li>
+                        <li>Use <code>-v</code> for volume mounting</li>
+                        <li>Press <code>CTRL+C</code> to stop foreground containers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Dockerfile -->
+        <div class="section">
+            <div class="card">
+                <h2>📝 Dockerfile - Building Custom Images</h2>
+                
+                <p style="font-size: 1.1em; margin-bottom: 2rem;">
+                    A Dockerfile is a text file containing instructions to build a Docker image. 
+                    Docker engine processes these instructions from top to bottom using DSL 
+                    (Domain Specific Language) keywords.
+                </p>
+
+                <div class="visual-diagram">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;">Image Build Process</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-vertical">
+                            <div class="box" style="background: #f3f4f6; color: #1f2937;">Dockerfile</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box" style="background: #dbeafe; color: #1e40af;">docker build</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box box-container">Docker Image</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box" style="background: #dcfce7; color: #166534;">docker run</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box box-daemon">Running Container</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Dockerfile Keywords</h3>
+
+                <div class="dockerfile-keyword">
+                    <h4>FROM - Base Image</h4>
+                    <p>Specifies the base image to use. This is the starting point of your image.</p>
+                    <div class="code-block">
+FROM java:jdk-1.8
+FROM python:3.9
+FROM node:14
+FROM ubuntu:20.04
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>MAINTAINER / LABEL - Image Metadata</h4>
+                    <p>MAINTAINER is deprecated. Use LABEL instead to specify author information.</p>
+                    <div class="code-block">
+<span class="code-comment"># Deprecated (old way)</span>
+MAINTAINER DRONA &lt;contact@dronaintelligence.com&gt;
+
+<span class="code-comment"># Recommended (new way)</span>
+LABEL maintainer="DRONA &lt;contact@dronaintelligence.com&gt;"
+LABEL version="1.0"
+LABEL description="My Application"
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>COPY - Copy Files</h4>
+                    <p>Copies files from source to destination during image creation.</p>
+                    <div class="code-block">
+COPY &lt;source&gt; &lt;destination&gt;
+
+<span class="code-comment"># Examples:</span>
+COPY target/app.war /app/tomcat/webapps/app.war
+COPY package.json /app/
+COPY . /app
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>ADD - Advanced Copy</h4>
+                    <p>Like COPY, but can also download from URLs and extract archives.</p>
+                    <div class="code-block">
+ADD &lt;source&gt; &lt;destination&gt;
+ADD &lt;URL&gt; &lt;destination&gt;
+
+<span class="code-comment"># Examples:</span>
+ADD app.tar.gz /app/  <span class="code-comment"># Automatically extracts</span>
+ADD https://example.com/file.zip /app/
+                    </div>
+                    <div class="warning-box">
+                        <p><strong>Difference:</strong> COPY is preferred for local files. ADD has extra features but use with caution.</p>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>RUN - Execute Commands (Build Time)</h4>
+                    <p>Executes commands during image build. Can have multiple RUN instructions.</p>
+                    <div class="code-block">
+RUN yum install maven -y
+RUN yum install git -y
+RUN git clone https://github.com/example/repo.git
+RUN mvn clean package
+
+<span class="code-comment"># Best practice: Chain commands to reduce layers</span>
+RUN yum install maven git -y && \
+    git clone https://github.com/example/repo.git && \
+    mvn clean package
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>CMD - Default Command (Run Time)</h4>
+                    <p>Specifies the command to run when container starts. Only last CMD is executed.</p>
+                    <div class="code-block">
+CMD ["java", "-jar", "app.jar"]
+CMD sudo start tomcat
+
+<span class="code-comment"># If multiple CMD, only last one runs!</span>
+CMD echo "First"   <span class="code-comment"># Ignored</span>
+CMD echo "Second"  <span class="code-comment"># This one runs</span>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>ENTRYPOINT - Container Entry Point</h4>
+                    <p>Like CMD, but cannot be overridden. Defines the executable for the container.</p>
+                    <div class="code-block">
+ENTRYPOINT ["echo", "Welcome to DRONA Intelligence"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+<span class="code-comment"># Difference: CMD can be overridden at runtime</span>
+<span class="code-comment"># ENTRYPOINT cannot be overridden</span>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>WORKDIR - Set Working Directory</h4>
+                    <p>Sets the working directory for subsequent instructions.</p>
+                    <div class="code-block">
+WORKDIR /app
+
+<span class="code-comment"># All commands after this run from /app</span>
+RUN pwd  <span class="code-comment"># Prints /app</span>
+COPY . .  <span class="code-comment"># Copies to /app</span>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>ENV - Environment Variables</h4>
+                    <p>Sets environment variables inside the container.</p>
+                    <div class="code-block">
+ENV JAVA_HOME=/usr/lib/jvm/java-8
+ENV PATH=$PATH:$JAVA_HOME/bin
+ENV APP_PORT=8080
+ENV NODE_ENV=production
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>ARG - Build Arguments</h4>
+                    <p>Defines variables that can be passed at build time.</p>
+                    <div class="code-block">
+ARG branch=master
+ARG version
+
+RUN git clone -b $branch https://github.com/example/repo.git
+
+<span class="code-comment"># Build with:</span>
+<span class="command">$ docker build --build-arg branch=develop -t myapp .</span>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>EXPOSE - Document Port</h4>
+                    <p>Documents which port the container will listen on (metadata only).</p>
+                    <div class="code-block">
+EXPOSE 8080
+EXPOSE 3000
+EXPOSE 80 443
+
+<span class="code-comment"># To actually publish ports, use -p flag:</span>
+<span class="command">$ docker run -p 8080:8080 myapp</span>
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>VOLUME - Data Persistence</h4>
+                    <p>Specifies mount points for persistent storage.</p>
+                    <div class="code-block">
+VOLUME /app/data
+VOLUME ["/var/log", "/var/db"]
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>USER - Set User</h4>
+                    <p>Sets the user for subsequent instructions.</p>
+                    <div class="code-block">
+USER appuser
+
+<span class="code-comment"># All commands after this run as appuser</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 3rem;">Complete Example Dockerfile</h3>
+                <div class="code-block">
+<span class="code-comment"># Sample Dockerfile demonstrating all keywords</span>
+FROM ubuntu:20.04
+
+LABEL maintainer="DRONA &lt;contact@dronaintelligence.com&gt;"
+LABEL version="1.0"
+
+<span class="code-comment"># Build arguments</span>
+ARG APP_VERSION=1.0
+
+<span class="code-comment"># Environment variables</span>
+ENV APP_HOME=/app
+ENV APP_PORT=8080
+
+<span class="code-comment"># Install dependencies (combine RUN commands)</span>
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    apt-get clean
+
+<span class="code-comment"># Set working directory</span>
+WORKDIR $APP_HOME
+
+<span class="code-comment"># Copy application files</span>
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
+<span class="code-comment"># Create volume mount point</span>
+VOLUME /app/data
+
+<span class="code-comment"># Expose port</span>
+EXPOSE $APP_PORT
+
+<span class="code-comment"># Set user (security best practice)</span>
+USER appuser
+
+<span class="code-comment"># Container entry point</span>
+ENTRYPOINT ["python3", "app.py"]
+                </div>
+
+                <h3 style="margin-top: 3rem;">Building & Running Images</h3>
+                <div class="code-block">
+<span class="code-comment"># Build image from Dockerfile</span>
+<span class="command">$ docker build -t myapp .</span>
+
+<span class="code-comment"># Build with custom Dockerfile name</span>
+<span class="command">$ docker build -f Dockerfile.prod -t myapp .</span>
+
+<span class="code-comment"># Build with build arguments</span>
+<span class="command">$ docker build --build-arg APP_VERSION=2.0 -t myapp .</span>
+
+<span class="code-comment"># Run the image</span>
+<span class="command">$ docker run -d -p 8080:8080 --name mycontainer myapp</span>
+
+<span class="code-comment"># Tag image</span>
+<span class="command">$ docker tag myapp username/myapp:v1.0</span>
+
+<span class="code-comment"># Push to Docker Hub</span>
+<span class="command">$ docker login</span>
+<span class="command">$ docker push username/myapp:v1.0</span>
+                </div>
+
+                <div class="success-box">
+                    <h4>🎯 Best Practices</h4>
+                    <ul>
+                        <li><strong>Layer Optimization:</strong> Combine RUN commands to reduce image size</li>
+                        <li><strong>Use .dockerignore:</strong> Exclude unnecessary files from build context</li>
+                        <li><strong>Multi-stage Builds:</strong> Use for smaller production images</li>
+                        <li><strong>Security:</strong> Run as non-root user when possible</li>
+                        <li><strong>Cache:</strong> Order instructions from least to most frequently changing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Applications -->
+        <div class="section">
+            <div class="card">
+                <h2>🚀 Docker with Real Applications</h2>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Spring Boot Application with Docker</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>What is Spring Boot?</h4>
+                        <p>Spring Boot is an open-source Java framework for building applications quickly. It comes with an embedded server and packages as JAR/WAR files.</p>
+
+                        <h4>Dockerfile for Spring Boot</h4>
+                        <div class="code-block">
+FROM openjdk:11
+COPY target/spring-boot-app.jar /usr/app/
+WORKDIR /usr/app/
+ENTRYPOINT ["java", "-jar", "spring-boot-app.jar"]
+                        </div>
+
+                        <h4>Complete Deployment Steps</h4>
+                        <div class="code-block">
+<span class="code-comment"># 1. Install Git and Maven</span>
+$ sudo yum install git maven -y
+
+<span class="code-comment"># 2. Clone repository</span>
+$ git clone https://github.com/dronaintelligence/spring-boot-app.git
+$ cd spring-boot-app
+
+<span class="code-comment"># 3. Build application</span>
+$ mvn clean package
+
+<span class="code-comment"># 4. Build Docker image</span>
+$ docker build -t spring-boot-app .
+
+<span class="code-comment"># 5. Run container (detached mode)</span>
+$ docker run -d -p 8080:8080 --name myapp spring-boot-app
+
+<span class="code-comment"># 6. Check logs</span>
+$ docker logs myapp
+
+<span class="code-comment"># Access: http://your-server-ip:8080</span>
+                        </div>
+
+                        <div class="info-box">
+                            <h4>Detached Mode (-d flag)</h4>
+                            <p>Running with <code>-d</code> flag runs container in background, allowing you to execute other commands while container runs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Java Web Application (WAR file) with Docker</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Java web applications package as WAR files and need a web server like Apache Tomcat.</p>
+
+                        <h4>Dockerfile for Java Web App</h4>
+                        <div class="code-block">
+FROM tomcat:8.0.20-jre8
+COPY target/maven-web-app.war /usr/local/tomcat/webapps/maven-web-app.war
+                        </div>
+
+                        <h4>Deployment Steps</h4>
+                        <div class="code-block">
+$ git clone https://github.com/dronaintelligence/maven-web-app.git
+$ cd maven-web-app
+$ mvn clean package
+$ docker build -t maven-web-app .
+$ docker run -d -p 8080:8080 maven-web-app
+
+<span class="code-comment"># Access: http://server-ip:8080/maven-web-app/</span>
+                        </div>
+
+                        <div class="success-box">
+                            <p><strong>Note:</strong> The WAR file name becomes the context path. Here "maven-web-app.war" creates "/maven-web-app/" URL path.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Python Flask Application with Docker</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Dockerfile for Python App</h4>
+                        <div class="code-block">
+FROM python:3.6
+LABEL maintainer="DRONA &lt;contact@dronaintelligence.com&gt;"
+COPY . /app
+WORKDIR /app
+EXPOSE 5000
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python", "app.py"]
+                        </div>
+
+                        <h4>Deployment</h4>
+                        <div class="code-block">
+$ git clone https://github.com/dronaintelligence/python-flask-app.git
+$ cd python-flask-app
+$ docker build -t python-flask-app .
+$ docker run -d -p 5000:5000 python-flask-app
+
+<span class="code-comment"># Enter container to debug</span>
+$ docker exec -it &lt;container-id&gt; /bin/bash
+$ exit  <span class="code-comment"># To exit container</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Angular Application with Nginx</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Angular is a TypeScript-based framework. Runs on Node.js, default port 4200, typically served via Nginx on port 80.</p>
+
+                        <div class="code-block">
+$ git clone https://github.com/dronaintelligence/angular-app.git
+$ cd angular-app
+$ docker build -t angular-app .
+$ docker run -d -p 80:80 angular-app
+
+<span class="code-comment"># Access: http://server-ip/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Networking -->
+        <div class="section">
+            <div class="card">
+                <h2>🌐 Docker Networking</h2>
+
+                <p>Docker provides flexible networking to facilitate communication between containers and external networks.</p>
+
+                <h3>Network Types</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Network Type</th>
+                            <th>Description</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bridge (Default)</strong></td>
+                            <td>Containers on same network communicate via IP addresses or names</td>
+                            <td>Default network, single-host communication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Host</strong></td>
+                            <td>Container shares host network stack</td>
+                            <td>Maximum performance, no port mapping needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Overlay</strong></td>
+                            <td>Multi-host communication in swarm mode</td>
+                            <td>Distributed applications across multiple hosts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Macvlan</strong></td>
+                            <td>Assigns MAC address, makes container appear as physical device</td>
+                            <td>Legacy apps requiring physical network presence</td>
+                        </tr>
+                        <tr>
+                            <td><strong>None</strong></td>
+                            <td>No network access</td>
+                            <td>Isolated containers, maximum security</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Network Commands</h3>
+
+                <div class="command-reference">
+                    <div class="command-card">
+                        <h4>Create Network</h4>
+                        <code>$ docker network create &lt;network-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>List Networks</h4>
+                        <code>$ docker network ls</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Inspect Network</h4>
+                        <code>$ docker network inspect &lt;network-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Connect Container</h4>
+                        <code>$ docker network connect &lt;network&gt; &lt;container&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Disconnect Container</h4>
+                        <code>$ docker network disconnect &lt;network&gt; &lt;container&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Network</h4>
+                        <code>$ docker network rm &lt;network-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Unused Networks</h4>
+                        <code>$ docker network prune</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Create Overlay Network</h4>
+                        <code>$ docker network create --driver overlay &lt;name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Create Bridge Network</h4>
+                        <code>$ docker network create --driver bridge &lt;name&gt;</code>
+                    </div>
+                </div>
+
+                <h3>Practical Example</h3>
+                <div class="code-block">
+<span class="code-comment"># Create custom network</span>
+$ docker network create bank-network
+
+<span class="code-comment"># List networks</span>
+$ docker network ls
+
+<span class="code-comment"># Inspect network details</span>
+$ docker network inspect bank-network
+
+<span class="code-comment"># Run container on custom network</span>
+$ docker run -d --network bank-network --name app1 nginx
+
+<span class="code-comment"># Run another container on same network</span>
+$ docker run -d --network bank-network --name app2 nginx
+
+<span class="code-comment"># Containers can now communicate using container names!</span>
+<span class="code-comment"># From app1: ping app2 (will work)</span>
+
+<span class="code-comment"># Disconnect container from network</span>
+$ docker network disconnect bank-network app1
+
+<span class="code-comment"># Remove network</span>
+$ docker network rm bank-network
+                </div>
+
+                <div class="success-box">
+                    <h4>Key Benefits</h4>
+                    <ul>
+                        <li><strong>Isolation:</strong> Containers on different networks can't communicate</li>
+                        <li><strong>Name Resolution:</strong> Use container names instead of IPs</li>
+                        <li><strong>Security:</strong> Control which containers can talk to each other</li>
+                        <li><strong>Flexibility:</strong> Connect/disconnect containers dynamically</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Volumes -->
+        <div class="section">
+            <div class="card">
+                <h2>💾 Docker Volumes - Data Persistence</h2>
+
+                <h3>Stateless vs Stateful Containers</h3>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Stateless Containers</th>
+                            <th>Stateful Containers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data lost when container is destroyed</td>
+                            <td>Data persists even after container deletion</td>
+                        </tr>
+                        <tr>
+                            <td>Default Docker behavior</td>
+                            <td>Achieved using Docker Volumes</td>
+                        </tr>
+                        <tr>
+                            <td>Suitable for temporary data</td>
+                            <td>Required for databases, file storage</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Types of Volumes</h3>
+
+                <div class="dockerfile-keyword">
+                    <h4>1. Anonymous Volumes</h4>
+                    <p>Created without a name, Docker generates random ID</p>
+                    <div class="code-block">
+$ docker run -v /app/data nginx
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>2. Named Volumes (Recommended ✅)</h4>
+                    <p>Created with a specific name, easy to manage</p>
+                    <div class="code-block">
+$ docker volume create my-volume
+$ docker run -v my-volume:/app/data nginx
+                    </div>
+                </div>
+
+                <div class="dockerfile-keyword">
+                    <h4>3. Bind Mounts</h4>
+                    <p>Maps host machine directory to container directory</p>
+                    <div class="code-block">
+$ docker run -v /host/path:/container/path nginx
+                    </div>
+                </div>
+
+                <h3>Volume Commands</h3>
+
+                <div class="command-reference">
+                    <div class="command-card">
+                        <h4>Create Volume</h4>
+                        <code>$ docker volume create &lt;volume-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>List Volumes</h4>
+                        <code>$ docker volume ls</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Inspect Volume</h4>
+                        <code>$ docker volume inspect &lt;volume-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Volume</h4>
+                        <code>$ docker volume rm &lt;volume-name&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove All Volumes</h4>
+                        <code>$ docker system prune --volumes</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Dangling Volumes</h4>
+                        <code>$ docker volume rm $(docker volume ls -q -f dangling=true)</code>
+                    </div>
+                </div>
+
+                <h3>Practical Example: MySQL with Persistent Storage</h3>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Complete MySQL Volume Lab</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="code-block">
+<span class="code-comment"># 1. Create volume</span>
+$ docker volume create mysql_data
+
+<span class="code-comment"># 2. Run MySQL with volume</span>
+$ docker run -d --name mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -v mysql_data:/var/lib/mysql \
+  mysql:8.0
+
+<span class="code-comment"># 3. Connect to MySQL</span>
+$ docker exec -it mysql bash
+$ mysql -u root -p
+
+<span class="code-comment"># 4. Create database and insert data</span>
+CREATE DATABASE testdb;
+USE testdb;
+CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50));
+INSERT INTO users (name) VALUES ('Alice'), ('Bob'), ('Charlie');
+SELECT * FROM users;
+exit
+exit
+
+<span class="code-comment"># 5. Destroy container</span>
+$ docker rm -f mysql
+
+<span class="code-comment"># 6. Create new container with SAME volume</span>
+$ docker run -d --name mysql_new \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -v mysql_data:/var/lib/mysql \
+  mysql:8.0
+
+<span class="code-comment"># 7. Verify data still exists!</span>
+$ docker exec -it mysql_new bash
+$ mysql -u root -p
+USE testdb;
+SELECT * FROM users;  <span class="code-comment"># Data is still there! ✅</span>
+exit
+exit
+
+<span class="code-comment"># 8. Cleanup</span>
+$ docker rm -f mysql_new
+$ docker volume rm mysql_data
+                        </div>
+
+                        <div class="success-box">
+                            <h4>🎯 What We Proved</h4>
+                            <p>Data persists across container lifecycles when using volumes. This is essential for databases and stateful applications!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: Docker Compose -->
+        <div class="section">
+            <div class="card">
+                <h2>🎼 Docker Compose - Multi-Container Applications</h2>
+
+                <p>Docker Compose is a tool for defining and running multi-container Docker applications. Use a YAML file to configure your application's services.</p>
+
+                <h3>Why Docker Compose?</h3>
+                <div class="success-box">
+                    <ul>
+                        <li>Manage multiple containers with a single command</li>
+                        <li>Define services, networks, and volumes in one file</li>
+                        <li>Easy setup and deployment</li>
+                        <li>Perfect for development environments</li>
+                    </ul>
+                </div>
+
+                <h3>Docker Compose File Structure</h3>
+                <div class="code-block">
+version: '3'
+services:
+  <span class="code-comment"># Define your containers here</span>
+networks:
+  <span class="code-comment"># Define your networks here</span>
+volumes:
+  <span class="code-comment"># Define your volumes here</span>
+                </div>
+
+                <h3>Installation</h3>
+                <div class="code-block">
+<span class="code-comment"># Download Docker Compose</span>
+$ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+<span class="code-comment"># Add execution permission</span>
+$ sudo chmod +x /usr/local/bin/docker-compose
+
+<span class="code-comment"># Verify installation</span>
+$ docker-compose --version
+                </div>
+
+                <h3>Essential Commands</h3>
+
+                <div class="command-reference">
+                    <div class="command-card">
+                        <h4>Start Services</h4>
+                        <code>$ docker-compose up -d</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">-d runs in detached mode</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Custom File</h4>
+                        <code>$ docker-compose -f &lt;filename&gt; up -d</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>List Containers</h4>
+                        <code>$ docker-compose ps</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>View Images</h4>
+                        <code>$ docker-compose images</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Restart Services</h4>
+                        <code>$ docker-compose restart</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Stop & Remove</h4>
+                        <code>$ docker-compose down</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>View Logs</h4>
+                        <code>$ docker-compose logs -f</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Scale Services</h4>
+                        <code>$ docker-compose up -d --scale web=3</code>
+                    </div>
+                </div>
+
+                <h3>Example 1: Simple Web + Database</h3>
+                <div class="code-block">
+version: '3'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - 80:80
+    networks:
+      - app-network
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=myapp
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
+                </div>
+
+                <h3>Example 2: Spring Boot + MySQL</h3>
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Complete Spring Boot + MySQL Setup</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="code-block">
+<span class="code-comment"># 1. Clone repository</span>
+$ git clone https://github.com/dronaintelligence/spring-boot-mysql-compose.git
+$ cd spring-boot-mysql-compose
+
+<span class="code-comment"># 2. Build application</span>
+$ mvn clean package
+
+<span class="code-comment"># 3. Build Docker image</span>
+$ docker build -t spring-boot-mysql-app .
+
+<span class="code-comment"># 4. Start with Docker Compose</span>
+$ docker-compose up -d
+
+<span class="code-comment"># 5. Check running services</span>
+$ docker-compose ps
+
+<span class="code-comment"># 6. Access application</span>
+<span class="code-comment"># http://server-ip:8080</span>
+
+<span class="code-comment"># 7. Connect to database</span>
+$ docker exec -it &lt;db-container-name&gt; /bin/bash
+$ mysql -u root -p
+show databases;
+use springdb;
+show tables;
+select * from book;
+exit
+exit
+
+<span class="code-comment"># 8. Stop everything</span>
+$ docker-compose down
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: Docker Swarm -->
+        <div class="section">
+            <div class="card">
+                <h2>🐝 Docker Swarm - Container Orchestration</h2>
+
+                <p>Docker Swarm is a native clustering and orchestration solution. It turns multiple Docker hosts into a single virtual Docker host.</p>
+
+                <h3>Key Concepts</h3>
+
+                <div class="visual-diagram">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Docker Swarm Architecture</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-vertical">
+                            <div class="box box-daemon">Manager Node</div>
+                            <div style="display: flex; justify-content: center; gap: 1rem; margin: 1rem 0;">
+                                <div class="arrow">⬇️</div>
+                                <div class="arrow">⬇️</div>
+                                <div class="arrow">⬇️</div>
+                            </div>
+                            <div style="display: flex; justify-content: center; gap: 1rem;">
+                                <div class="box box-container">Worker Node 1</div>
+                                <div class="box box-container">Worker Node 2</div>
+                                <div class="box box-container">Worker Node 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Swarm Features</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Container Orchestration</strong></td>
+                            <td>Manage containers across multiple hosts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>High Availability</strong></td>
+                            <td>Automatic failover and container redistribution</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scaling</strong></td>
+                            <td>Easily scale services up or down</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Service Discovery</strong></td>
+                            <td>Built-in DNS-based service discovery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Load Balancing</strong></td>
+                            <td>Distribute requests across replicas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rolling Updates</strong></td>
+                            <td>Update services without downtime</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security</strong></td>
+                            <td>TLS encryption and automatic certificates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Self-Healing</strong></td>
+                            <td>Automatically restart failed containers</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Swarm Setup</h3>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Complete Swarm Cluster Setup</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Prerequisites</h4>
+                        <div class="info-box">
+                            <ul>
+                                <li>3 EC2 instances (Ubuntu)</li>
+                                <li>Docker installed on all instances</li>
+                                <li>Port 2377 open in security group</li>
+                            </ul>
+                        </div>
+
+                        <h4>Step 1: Install Docker on All Nodes</h4>
+                        <div class="code-block">
+$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh
+                        </div>
+
+                        <h4>Step 2: Initialize Swarm (Manager Node)</h4>
+                        <div class="code-block">
+<span class="code-comment"># On manager node, initialize swarm</span>
+$ sudo docker swarm init --advertise-addr &lt;manager-private-ip&gt;
+
+<span class="code-comment"># Example:</span>
+$ sudo docker swarm init --advertise-addr 172.31.37.100
+
+<span class="code-comment"># This will output a join token. Copy it!</span>
+                        </div>
+
+                        <h4>Step 3: Get Join Token</h4>
+                        <div class="code-block">
+<span class="code-comment"># On manager node, get worker join token</span>
+$ sudo docker swarm join-token worker
+
+<span class="code-comment"># Copy the output command</span>
+                        </div>
+
+                        <h4>Step 4: Join Worker Nodes</h4>
+                        <div class="code-block">
+<span class="code-comment"># Run on each worker node (paste the token from manager)</span>
+$ sudo docker swarm join --token SWMTKN-1-xxx... 172.31.37.100:2377
+                        </div>
+
+                        <h4>Step 5: Verify Cluster</h4>
+                        <div class="code-block">
+<span class="code-comment"># On manager node, view all nodes</span>
+$ sudo docker node ls
+
+<span class="code-comment"># You should see all 3 nodes!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Swarm Services</h3>
+
+                <div class="info-box">
+                    <p><strong>Service:</strong> A collection of one or more containers of the same image running across the swarm cluster.</p>
+                </div>
+
+                <h4>Service Commands</h4>
+                <div class="command-reference">
+                    <div class="command-card">
+                        <h4>Create Service</h4>
+                        <code>$ docker service create --name &lt;name&gt; -p &lt;port:port&gt; &lt;image&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>List Services</h4>
+                        <code>$ docker service ls</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Scale Service</h4>
+                        <code>$ docker service scale &lt;service&gt;=&lt;replicas&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Inspect Service</h4>
+                        <code>$ docker service inspect --pretty &lt;service&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>View Tasks</h4>
+                        <code>$ docker service ps &lt;service&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Update Service</h4>
+                        <code>$ docker service update --image &lt;new-image&gt; &lt;service&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Remove Service</h4>
+                        <code>$ docker service rm &lt;service&gt;</code>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Leave Swarm</h4>
+                        <code>$ docker swarm leave</code>
+                    </div>
+                </div>
+
+                <h3>Practical Example</h3>
+                <div class="code-block">
+<span class="code-comment"># Create a web service with 1 replica (default)</span>
+$ sudo docker service create --name my-web-app \
+  -p 8080:8080 \
+  dronaintelligence/maven-web-app
+
+<span class="code-comment"># Check service status</span>
+$ sudo docker service ls
+
+<span class="code-comment"># Access: http://manager-ip:8080/maven-web-app/</span>
+
+<span class="code-comment"># Scale to 5 replicas</span>
+$ sudo docker service scale my-web-app=5
+
+<span class="code-comment"># View where replicas are running</span>
+$ sudo docker service ps my-web-app
+
+<span class="code-comment"># Inspect service details</span>
+$ sudo docker service inspect --pretty my-web-app
+
+<span class="code-comment"># Update service image</span>
+$ sudo docker service update --image dronaintelligence/new-app my-web-app
+
+<span class="code-comment"># Remove service</span>
+$ sudo docker service rm my-web-app
+                </div>
+
+                <div class="success-box">
+                    <h4>🎯 Key Advantages</h4>
+                    <ul>
+                        <li><strong>High Availability:</strong> If a node fails, containers automatically move</li>
+                        <li><strong>Load Balancing:</strong> Traffic distributed across all replicas</li>
+                        <li><strong>Easy Scaling:</strong> Scale up/down with one command</li>
+                        <li><strong>Zero Downtime:</strong> Rolling updates ensure continuous service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>DRONA Intelligence</strong></p>
+            <p>Complete Docker Learning Material</p>
+            <p>Contact: <a href="mailto:contact@dronaintelligence.com">contact@dronaintelligence.com</a></p>
+            <p style="margin-top: 1rem; font-size: 0.9em;">© 2024 DRONA Intelligence. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(index) {
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            sections.forEach((section, i) => {
+                section.classList.remove('active');
+                buttons[i].classList.remove('active');
+            });
+            
+            sections[index].classList.add('active');
+            buttons[index].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.textContent = '▼';
+            } else {
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    c.classList.remove('active');
+                });
+                document.querySelectorAll('.accordion-header span:last-child').forEach(a => {
+                    a.textContent = '▼';
+                });
+                
+                content.classList.add('active');
+                arrow.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>
