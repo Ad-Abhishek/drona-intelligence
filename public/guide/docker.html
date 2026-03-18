@@ -449,7 +449,6 @@
             <button class="nav-btn" onclick="showSection(5)">Networking</button>
             <button class="nav-btn" onclick="showSection(6)">Volumes</button>
             <button class="nav-btn" onclick="showSection(7)">Docker Compose</button>
-            <button class="nav-btn" onclick="showSection(8)">Docker Swarm</button>
         </div>
     </nav>
 
@@ -1539,31 +1538,47 @@ $ docker volume rm mysql_data
             <div class="card">
                 <h2>🎼 Docker Compose - Multi-Container Applications</h2>
 
-                <p>Docker Compose is a tool for defining and running multi-container Docker applications. Use a YAML file to configure your application's services.</p>
+                <p style="font-size: 1.1em; line-height: 1.8;">Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services, networks, and volumes. Then, with a single command, you create and start all the services from your configuration.</p>
+
+                <div class="visual-diagram">
+                    <h3 style="text-align: center; color: var(--drona-primary); margin-bottom: 2rem;">Docker Compose Workflow</h3>
+                    <div class="architecture-diagram">
+                        <div class="flow-vertical">
+                            <div class="box box-client">docker-compose.yml</div>
+                            <div class="arrow">⬇️</div>
+                            <div class="box box-daemon">docker-compose up</div>
+                            <div class="arrow">⬇️</div>
+                            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                <div class="box box-container">Web Service</div>
+                                <div class="box box-container">Database</div>
+                                <div class="box box-container">Cache</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <h3>Why Docker Compose?</h3>
                 <div class="success-box">
+                    <h4>Key Benefits</h4>
                     <ul>
-                        <li>Manage multiple containers with a single command</li>
-                        <li>Define services, networks, and volumes in one file</li>
-                        <li>Easy setup and deployment</li>
-                        <li>Perfect for development environments</li>
+                        <li><strong>Single Command Deployment:</strong> Start entire application stack with one command</li>
+                        <li><strong>Environment Consistency:</strong> Same configuration across dev, test, and production</li>
+                        <li><strong>Service Isolation:</strong> Each service runs in its own container</li>
+                        <li><strong>Easy Scaling:</strong> Scale individual services independently</li>
+                        <li><strong>Network Management:</strong> Automatic service discovery and networking</li>
+                        <li><strong>Volume Management:</strong> Persistent data storage across container restarts</li>
                     </ul>
                 </div>
 
-                <h3>Docker Compose File Structure</h3>
-                <div class="code-block">
-version: '3'
-services:
-  <span class="code-comment"># Define your containers here</span>
-networks:
-  <span class="code-comment"># Define your networks here</span>
-volumes:
-  <span class="code-comment"># Define your volumes here</span>
-                </div>
-
                 <h3>Installation</h3>
-                <div class="code-block">
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Docker Compose Installation Methods</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Method 1: Using curl (Linux)</h4>
+                        <div class="code-block">
 <span class="code-comment"># Download Docker Compose</span>
 $ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
@@ -1572,343 +1587,398 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 
 <span class="code-comment"># Verify installation</span>
 $ docker-compose --version
+                        </div>
+
+                        <h4>Method 2: Using pip (Python)</h4>
+                        <div class="code-block">
+<span class="code-comment"># Install using pip</span>
+$ pip install docker-compose
+
+<span class="code-comment"># Verify installation</span>
+$ docker-compose --version
+                        </div>
+
+                        <h4>Method 3: Docker Desktop (Windows/Mac)</h4>
+                        <div class="info-box">
+                            <p>Docker Compose comes pre-installed with Docker Desktop for Windows and Mac.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Docker Compose File Structure</h3>
+                <div class="dockerfile-keyword">
+                    <h4>Basic YAML Structure</h4>
+                    <div class="code-block">
+version: '3.8'  <span class="code-comment"># Compose file format version</span>
+
+services:       <span class="code-comment"># Define your containers</span>
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+  
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+
+networks:       <span class="code-comment"># Define custom networks (optional)</span>
+  app-network:
+    driver: bridge
+
+volumes:        <span class="code-comment"># Define persistent volumes (optional)</span>
+  db-data:
+    driver: local
+                    </div>
                 </div>
 
                 <h3>Essential Commands</h3>
-
                 <div class="command-reference">
                     <div class="command-card">
                         <h4>Start Services</h4>
-                        <code>$ docker-compose up -d</code>
-                        <p style="margin-top: 0.5rem; font-size: 0.9em;">-d runs in detached mode</p>
+                        <code>$ docker-compose up</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Add -d for detached mode</p>
                     </div>
 
                     <div class="command-card">
-                        <h4>Custom File</h4>
-                        <code>$ docker-compose -f &lt;filename&gt; up -d</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>List Containers</h4>
-                        <code>$ docker-compose ps</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>View Images</h4>
-                        <code>$ docker-compose images</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Restart Services</h4>
-                        <code>$ docker-compose restart</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Stop & Remove</h4>
+                        <h4>Stop Services</h4>
                         <code>$ docker-compose down</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Stops and removes containers</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Build Images</h4>
+                        <code>$ docker-compose build</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Rebuild images from Dockerfile</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>View Services</h4>
+                        <code>$ docker-compose ps</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">List running services</p>
                     </div>
 
                     <div class="command-card">
                         <h4>View Logs</h4>
                         <code>$ docker-compose logs -f</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">-f follows log output</p>
                     </div>
 
                     <div class="command-card">
                         <h4>Scale Services</h4>
-                        <code>$ docker-compose up -d --scale web=3</code>
+                        <code>$ docker-compose up --scale web=3</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Run 3 instances of web service</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Execute Commands</h4>
+                        <code>$ docker-compose exec web bash</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Run bash in web service</p>
+                    </div>
+
+                    <div class="command-card">
+                        <h4>Custom File</h4>
+                        <code>$ docker-compose -f custom.yml up</code>
+                        <p style="margin-top: 0.5rem; font-size: 0.9em;">Use custom compose file</p>
                     </div>
                 </div>
 
-                <h3>Example 1: Simple Web + Database</h3>
-                <div class="code-block">
-version: '3'
+                <h3>Complete Examples</h3>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Example 1: WordPress + MySQL</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A complete WordPress setup with MySQL database:</p>
+                        <div class="code-block">
+version: '3.8'
 
 services:
-  web:
-    image: nginx:latest
+  wordpress:
+    image: wordpress:latest
     ports:
-      - 80:80
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - wp-network
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp-network
+
+volumes:
+  wordpress_data:
+  db_data:
+
+networks:
+  wp-network:
+    driver: bridge
+                        </div>
+                        <div class="success-box">
+                            <h4>Usage:</h4>
+                            <div class="code-block">
+<span class="code-comment"># Start the application</span>
+$ docker-compose up -d
+
+<span class="code-comment"># Access WordPress at http://localhost:8080</span>
+
+<span class="code-comment"># Stop the application</span>
+$ docker-compose down
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Example 2: Node.js + MongoDB + Redis</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A modern web application stack:</p>
+                        <div class="code-block">
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongo:27017/myapp
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+      - redis
     networks:
       - app-network
 
-  db:
-    image: mysql:latest
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=myapp
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
     volumes:
-      - db-data:/var/lib/mysql
+      - mongo_data:/data/db
     networks:
       - app-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
 
 networks:
   app-network:
     driver: bridge
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Example 3: Spring Boot + PostgreSQL + Adminer</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Java Spring Boot application with database management:</p>
+                        <div class="code-block">
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/springdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - db
+    networks:
+      - spring-network
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: springdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - spring-network
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    networks:
+      - spring-network
 
 volumes:
-  db-data:
-                </div>
+  postgres_data:
 
-                <h3>Example 2: Spring Boot + MySQL</h3>
-                <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Complete Spring Boot + MySQL Setup</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="code-block">
-<span class="code-comment"># 1. Clone repository</span>
-$ git clone https://github.com/dronaintelligence/spring-boot-mysql-compose.git
-$ cd spring-boot-mysql-compose
-
-<span class="code-comment"># 2. Build application</span>
-$ mvn clean package
-
-<span class="code-comment"># 3. Build Docker image</span>
-$ docker build -t spring-boot-mysql-app .
-
-<span class="code-comment"># 4. Start with Docker Compose</span>
-$ docker-compose up -d
-
-<span class="code-comment"># 5. Check running services</span>
-$ docker-compose ps
-
-<span class="code-comment"># 6. Access application</span>
-<span class="code-comment"># http://server-ip:8080</span>
-
-<span class="code-comment"># 7. Connect to database</span>
-$ docker exec -it &lt;db-container-name&gt; /bin/bash
-$ mysql -u root -p
-show databases;
-use springdb;
-show tables;
-select * from book;
-exit
-exit
-
-<span class="code-comment"># 8. Stop everything</span>
-$ docker-compose down
+networks:
+  spring-network:
+    driver: bridge
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 8: Docker Swarm -->
-        <div class="section">
-            <div class="card">
-                <h2>🐝 Docker Swarm - Container Orchestration</h2>
-
-                <p>Docker Swarm is a native clustering and orchestration solution. It turns multiple Docker hosts into a single virtual Docker host.</p>
-
-                <h3>Key Concepts</h3>
-
-                <div class="visual-diagram">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">Docker Swarm Architecture</h3>
-                    <div class="architecture-diagram">
-                        <div class="flow-vertical">
-                            <div class="box box-daemon">Manager Node</div>
-                            <div style="display: flex; justify-content: center; gap: 1rem; margin: 1rem 0;">
-                                <div class="arrow">⬇️</div>
-                                <div class="arrow">⬇️</div>
-                                <div class="arrow">⬇️</div>
-                            </div>
-                            <div style="display: flex; justify-content: center; gap: 1rem;">
-                                <div class="box box-container">Worker Node 1</div>
-                                <div class="box box-container">Worker Node 2</div>
-                                <div class="box box-container">Worker Node 3</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Swarm Features</h3>
-
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Container Orchestration</strong></td>
-                            <td>Manage containers across multiple hosts</td>
-                        </tr>
-                        <tr>
-                            <td><strong>High Availability</strong></td>
-                            <td>Automatic failover and container redistribution</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Scaling</strong></td>
-                            <td>Easily scale services up or down</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Service Discovery</strong></td>
-                            <td>Built-in DNS-based service discovery</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Load Balancing</strong></td>
-                            <td>Distribute requests across replicas</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Rolling Updates</strong></td>
-                            <td>Update services without downtime</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Security</strong></td>
-                            <td>TLS encryption and automatic certificates</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Self-Healing</strong></td>
-                            <td>Automatically restart failed containers</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Swarm Setup</h3>
-
-                <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Complete Swarm Cluster Setup</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="accordion-content">
-                        <h4>Prerequisites</h4>
                         <div class="info-box">
+                            <h4>Access Points:</h4>
                             <ul>
-                                <li>3 EC2 instances (Ubuntu)</li>
-                                <li>Docker installed on all instances</li>
-                                <li>Port 2377 open in security group</li>
+                                <li><strong>Application:</strong> http://localhost:8080</li>
+                                <li><strong>Database Admin:</strong> http://localhost:8081</li>
+                                <li><strong>Database Connection:</strong> Server: db, Username: postgres, Password: password</li>
                             </ul>
                         </div>
+                    </div>
+                </div>
 
-                        <h4>Step 1: Install Docker on All Nodes</h4>
+                <h3>Advanced Features</h3>
+
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Environment Variables & Secrets</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Using .env Files</h4>
+                        <p>Create a <code>.env</code> file in your project root:</p>
                         <div class="code-block">
-$ curl -fsSL https://get.docker.com -o get-docker.sh
-$ sudo sh get-docker.sh
+<span class="code-comment"># .env file</span>
+DB_PASSWORD=mysecretpassword
+DB_NAME=myapp
+APP_PORT=3000
                         </div>
-
-                        <h4>Step 2: Initialize Swarm (Manager Node)</h4>
+                        <p>Reference in docker-compose.yml:</p>
                         <div class="code-block">
-<span class="code-comment"># On manager node, initialize swarm</span>
-$ sudo docker swarm init --advertise-addr &lt;manager-private-ip&gt;
-
-<span class="code-comment"># Example:</span>
-$ sudo docker swarm init --advertise-addr 172.31.37.100
-
-<span class="code-comment"># This will output a join token. Copy it!</span>
-                        </div>
-
-                        <h4>Step 3: Get Join Token</h4>
-                        <div class="code-block">
-<span class="code-comment"># On manager node, get worker join token</span>
-$ sudo docker swarm join-token worker
-
-<span class="code-comment"># Copy the output command</span>
-                        </div>
-
-                        <h4>Step 4: Join Worker Nodes</h4>
-                        <div class="code-block">
-<span class="code-comment"># Run on each worker node (paste the token from manager)</span>
-$ sudo docker swarm join --token SWMTKN-1-xxx... 172.31.37.100:2377
-                        </div>
-
-                        <h4>Step 5: Verify Cluster</h4>
-                        <div class="code-block">
-<span class="code-comment"># On manager node, view all nodes</span>
-$ sudo docker node ls
-
-<span class="code-comment"># You should see all 3 nodes!</span>
+version: '3.8'
+services:
+  app:
+    image: myapp
+    ports:
+      - "${APP_PORT}:3000"
+    environment:
+      - DATABASE_URL=postgres://user:${DB_PASSWORD}@db:5432/${DB_NAME}
                         </div>
                     </div>
                 </div>
 
-                <h3>Swarm Services</h3>
-
-                <div class="info-box">
-                    <p><strong>Service:</strong> A collection of one or more containers of the same image running across the swarm cluster.</p>
-                </div>
-
-                <h4>Service Commands</h4>
-                <div class="command-reference">
-                    <div class="command-card">
-                        <h4>Create Service</h4>
-                        <code>$ docker service create --name &lt;name&gt; -p &lt;port:port&gt; &lt;image&gt;</code>
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Health Checks & Dependencies</span>
+                        <span>▼</span>
                     </div>
-
-                    <div class="command-card">
-                        <h4>List Services</h4>
-                        <code>$ docker service ls</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Scale Service</h4>
-                        <code>$ docker service scale &lt;service&gt;=&lt;replicas&gt;</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Inspect Service</h4>
-                        <code>$ docker service inspect --pretty &lt;service&gt;</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>View Tasks</h4>
-                        <code>$ docker service ps &lt;service&gt;</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Update Service</h4>
-                        <code>$ docker service update --image &lt;new-image&gt; &lt;service&gt;</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Remove Service</h4>
-                        <code>$ docker service rm &lt;service&gt;</code>
-                    </div>
-
-                    <div class="command-card">
-                        <h4>Leave Swarm</h4>
-                        <code>$ docker swarm leave</code>
+                    <div class="accordion-content">
+                        <div class="code-block">
+version: '3.8'
+services:
+  web:
+    image: nginx
+    depends_on:
+      db:
+        condition: service_healthy
+    
+  db:
+    image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+                        </div>
                     </div>
                 </div>
 
-                <h3>Practical Example</h3>
-                <div class="code-block">
-<span class="code-comment"># Create a web service with 1 replica (default)</span>
-$ sudo docker service create --name my-web-app \
-  -p 8080:8080 \
-  dronaintelligence/maven-web-app
-
-<span class="code-comment"># Check service status</span>
-$ sudo docker service ls
-
-<span class="code-comment"># Access: http://manager-ip:8080/maven-web-app/</span>
-
-<span class="code-comment"># Scale to 5 replicas</span>
-$ sudo docker service scale my-web-app=5
-
-<span class="code-comment"># View where replicas are running</span>
-$ sudo docker service ps my-web-app
-
-<span class="code-comment"># Inspect service details</span>
-$ sudo docker service inspect --pretty my-web-app
-
-<span class="code-comment"># Update service image</span>
-$ sudo docker service update --image dronaintelligence/new-app my-web-app
-
-<span class="code-comment"># Remove service</span>
-$ sudo docker service rm my-web-app
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Production Deployment Tips</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="warning-box">
+                            <h4>Production Considerations</h4>
+                            <ul>
+                                <li>Use specific image tags instead of 'latest'</li>
+                                <li>Set resource limits (memory, CPU)</li>
+                                <li>Use secrets for sensitive data</li>
+                                <li>Implement proper logging</li>
+                                <li>Use external networks for security</li>
+                                <li>Regular backups of volumes</li>
+                            </ul>
+                        </div>
+                        <div class="code-block">
+version: '3.8'
+services:
+  web:
+    image: nginx:1.21-alpine  <span class="code-comment"># Specific version</span>
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+                        </div>
+                    </div>
                 </div>
 
                 <div class="success-box">
-                    <h4>🎯 Key Advantages</h4>
+                    <h4>🎯 Docker Compose Best Practices</h4>
                     <ul>
-                        <li><strong>High Availability:</strong> If a node fails, containers automatically move</li>
-                        <li><strong>Load Balancing:</strong> Traffic distributed across all replicas</li>
-                        <li><strong>Easy Scaling:</strong> Scale up/down with one command</li>
-                        <li><strong>Zero Downtime:</strong> Rolling updates ensure continuous service</li>
+                        <li><strong>Use .dockerignore:</strong> Exclude unnecessary files from build context</li>
+                        <li><strong>Multi-stage builds:</strong> Keep production images small</li>
+                        <li><strong>Named volumes:</strong> Use named volumes for persistent data</li>
+                        <li><strong>Environment separation:</strong> Use different compose files for dev/prod</li>
+                        <li><strong>Service discovery:</strong> Use service names for inter-container communication</li>
+                        <li><strong>Resource limits:</strong> Set appropriate memory and CPU limits</li>
                     </ul>
                 </div>
             </div>
