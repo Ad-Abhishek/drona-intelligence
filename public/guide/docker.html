@@ -1997,13 +1997,19 @@ services:
             const sections = document.querySelectorAll('.section');
             const buttons = document.querySelectorAll('.nav-btn');
             
+            console.log('Total sections:', sections.length);
+            console.log('Requested index:', index);
+            console.log('Section exists:', !!sections[index]);
+            
             sections.forEach((section, i) => {
                 section.classList.remove('active');
                 buttons[i].classList.remove('active');
             });
             
-            sections[index].classList.add('active');
-            buttons[index].classList.add('active');
+            if (sections[index]) {
+                sections[index].classList.add('active');
+                buttons[index].classList.add('active');
+            }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
